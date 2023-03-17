@@ -45,11 +45,6 @@ namespace ICKT.UI
 				_Instance._CurrentUI = createdUI;
 				_Instance._CreatedUIList.Add(createdUI);
 			}
-			else
-			{
-				Debug.LogError("please place starting UI in UIManager");
-				return;
-			}
 
 			UIBase[] uiCollection = data.UICollection;
 			foreach (var ui in uiCollection)

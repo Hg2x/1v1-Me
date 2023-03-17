@@ -15,18 +15,18 @@ namespace ICKT
 
 		private void Awake()
 		{
-			if (_Instance == null)
+			if (_Instance != null)
 			{
-				_Instance = this;
-				_ServiceLocator = gameObject.AddComponent<ServiceLocator>();
-				_ServiceLocator.Initialize();
-				var uiManager = gameObject.AddComponent<UIManager>();
-				ServiceLocator.Register(uiManager, true);
-				uiManager.Init(_UIManagerData);
-				DontDestroyOnLoad(_Instance);
+				Destroy(gameObject);
 			}
 
-			Destroy(gameObject);
+			_Instance = this;
+			_ServiceLocator = gameObject.AddComponent<ServiceLocator>();
+			_ServiceLocator.Initialize();
+			var uiManager = gameObject.AddComponent<UIManager>();
+			ServiceLocator.Register(uiManager, true);
+			uiManager.Init(_UIManagerData);
+			DontDestroyOnLoad(_Instance);
 		}
 
 		public static void GoToScene(string SceneName, Action callback)

@@ -1,9 +1,12 @@
 using ICKT.Services;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class FireWarriorUnit : UnitBase
 {
 	[SerializeField] private FireWarriorUnitData _Data;
+	[SerializeField] private AnimatorController _AnimatorNormal;
+	[SerializeField] private AnimatorController _AnimatorFire;
 	private InputHandler _Input; // playerInput
 
 	private const string IDLE = "Idle";
@@ -16,7 +19,7 @@ public class FireWarriorUnit : UnitBase
 	private const string TRANSFORMATION = "Transformation";
 
 	// TODO: Proper transformation. Fire Mode. Also change sprite + animator controller based on fire mode or not. Colliders depends on sprite.
-	// maybe do DodgeAmount as well
+	// maybe do DodgeAmount as well and move some functionalities to a separate PlayerUnitBase
 
 	protected override void Awake()
 	{
@@ -104,10 +107,12 @@ public class FireWarriorUnit : UnitBase
 		if (isFireMode)
 		{
 			// change to fire mode
+			_Animator.runtimeAnimatorController = _AnimatorFire;
 		}
 		else
 		{
 			// change to normal mode
+			_Animator.runtimeAnimatorController = _AnimatorNormal;
 		}
 	}
 
@@ -137,8 +142,8 @@ public class FireWarriorUnit : UnitBase
 			return;
 		}
 
-		// Transformation to fire mode
-		if (_Input.DoSkill1 && IsGrounded() && !_Data._IsFireMode)
+		// Transformation to change mode
+		if (_Input.DoSkill1 && IsGrounded())
 		{
 			ChangeAnimationState(TRANSFORMATION);
 			_Data._IsTransforming = true;

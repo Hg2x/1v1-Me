@@ -6,7 +6,7 @@ public abstract class UnitBase : MonoBehaviour
 {
 	protected Rigidbody2D _Rigidbody;
 	private SpriteRenderer _SpriteRenderer;
-	private Animator _Animator;
+	protected Animator _Animator;
 	protected string _CurrentAnimation;
 
 	protected virtual void Awake()

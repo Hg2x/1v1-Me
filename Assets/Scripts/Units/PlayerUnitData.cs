@@ -1,10 +1,9 @@
 using UnityEngine;
 using static ICKT.Editor.EditorLibrary;
 
-public class PlayerUnitBase : UnitDataBase
+public class PlayerUnitData : UnitDataBase
 {
 	[Header("Player Unit Related")]
-	[Min(0)] public float AttackCooldown; // not currently used
 	[Min(0)] public float JumpForce;
 	[Min(0)] public int JumpAmount;
 	[ReadOnlyField] public int JumpAmountLeft;

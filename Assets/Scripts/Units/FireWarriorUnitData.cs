@@ -2,7 +2,7 @@ using UnityEngine;
 using static ICKT.Editor.EditorLibrary;
 
 [CreateAssetMenu(fileName = "FireWarriorUnitData", menuName = "ScriptableObject/UnitData/FireWarriorUnitData")]
-public class FireWarriorUnitData : PlayerUnitBase
+public class FireWarriorUnitData : PlayerUnitData
 {
 	[Header("Fire Warrior Specific")]
 	[ReadOnlyField] public bool _IsFireMode;

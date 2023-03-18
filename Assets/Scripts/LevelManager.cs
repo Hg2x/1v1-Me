@@ -37,7 +37,6 @@ public class LevelManager : MonoBehaviour, IRegisterable
 
 		if (_ElapsedTime >= 1)
 		{
-			Debug.Log("Total time: " + _TotalTime);
 			_ElapsedTime -= 1;
 			OnSecondPassed?.Invoke(_TotalTime);
 		}

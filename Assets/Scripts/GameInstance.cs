@@ -11,6 +11,7 @@ namespace ICKT
 	{
 		private static GameInstance _Instance;
 		private static ServiceLocator _ServiceLocator;
+		private UIManager _UIManager;
 		[SerializeField] private UIManagerData _UIManagerData;
 
 		private void Awake()
@@ -23,9 +24,8 @@ namespace ICKT
 			_Instance = this;
 			_ServiceLocator = gameObject.AddComponent<ServiceLocator>();
 			_ServiceLocator.Initialize();
-			var uiManager = gameObject.AddComponent<UIManager>();
-			ServiceLocator.Register(uiManager, true);
-			uiManager.Init(_UIManagerData);
+			_UIManager = gameObject.AddComponent<UIManager>();
+			_UIManager.Init(_UIManagerData);
 			DontDestroyOnLoad(_Instance);
 		}
 

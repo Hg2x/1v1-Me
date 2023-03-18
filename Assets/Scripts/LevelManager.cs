@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour, IRegisterable
 {
+	[SerializeField] private FireWarriorUnit _PlayerUnitReference;
+
     private float _ElapsedTime = 0;
 	private float _TotalTime = 0;
 
@@ -20,7 +22,7 @@ public class LevelManager : MonoBehaviour, IRegisterable
 
 	private void Start()
 	{
-		
+		Instantiate(_PlayerUnitReference);
 	}
 
 	private void OnDestroy()

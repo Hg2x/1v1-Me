@@ -11,6 +11,8 @@ namespace ICKT.Editor
 		[AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
 		public class ReadOnlyFieldAttribute : PropertyAttribute { }
 
+
+#if UNITY_EDITOR
 		[CustomPropertyDrawer(typeof(ReadOnlyFieldAttribute))]
 		public class ReadOnlyDrawer : PropertyDrawer
 		{
@@ -22,4 +24,5 @@ namespace ICKT.Editor
 			}
 		}
 	}
+#endif
 }

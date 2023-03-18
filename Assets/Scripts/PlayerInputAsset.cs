@@ -46,6 +46,15 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""c24e75f7-c082-4129-b9d4-ee46668f0fd3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""f53e9873-02ac-47a7-bc80-0910182f893b"",
@@ -58,6 +67,24 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
                     ""name"": ""Skill1"",
                     ""type"": ""Button"",
                     ""id"": ""9696a559-41ac-4f61-bdcf-70776fce6b1b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill2"",
+                    ""type"": ""Button"",
+                    ""id"": ""4373ddca-667d-498f-a582-74d9d0b8e91d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill3"",
+                    ""type"": ""Button"",
+                    ""id"": ""bd85e80a-36b0-4823-9578-0562570e6d39"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -172,6 +199,39 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
                     ""action"": ""ShowDebugMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""414872ca-34dd-4d0f-8450-02f2b632226b"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8beff76-acd8-4108-9061-877eb4af3b86"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""951a76fc-2a82-411c-8b9e-84ace98ebda4"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -182,8 +242,11 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
         m_Default = asset.FindActionMap("Default", throwIfNotFound: true);
         m_Default_Move = m_Default.FindAction("Move", throwIfNotFound: true);
         m_Default_Jump = m_Default.FindAction("Jump", throwIfNotFound: true);
+        m_Default_Dodge = m_Default.FindAction("Dodge", throwIfNotFound: true);
         m_Default_Attack = m_Default.FindAction("Attack", throwIfNotFound: true);
         m_Default_Skill1 = m_Default.FindAction("Skill1", throwIfNotFound: true);
+        m_Default_Skill2 = m_Default.FindAction("Skill2", throwIfNotFound: true);
+        m_Default_Skill3 = m_Default.FindAction("Skill3", throwIfNotFound: true);
         m_Default_ShowDebugMenu = m_Default.FindAction("ShowDebugMenu", throwIfNotFound: true);
     }
 
@@ -246,8 +309,11 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
     private IDefaultActions m_DefaultActionsCallbackInterface;
     private readonly InputAction m_Default_Move;
     private readonly InputAction m_Default_Jump;
+    private readonly InputAction m_Default_Dodge;
     private readonly InputAction m_Default_Attack;
     private readonly InputAction m_Default_Skill1;
+    private readonly InputAction m_Default_Skill2;
+    private readonly InputAction m_Default_Skill3;
     private readonly InputAction m_Default_ShowDebugMenu;
     public struct DefaultActions
     {
@@ -255,8 +321,11 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
         public DefaultActions(@PlayerInputAsset wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Default_Move;
         public InputAction @Jump => m_Wrapper.m_Default_Jump;
+        public InputAction @Dodge => m_Wrapper.m_Default_Dodge;
         public InputAction @Attack => m_Wrapper.m_Default_Attack;
         public InputAction @Skill1 => m_Wrapper.m_Default_Skill1;
+        public InputAction @Skill2 => m_Wrapper.m_Default_Skill2;
+        public InputAction @Skill3 => m_Wrapper.m_Default_Skill3;
         public InputAction @ShowDebugMenu => m_Wrapper.m_Default_ShowDebugMenu;
         public InputActionMap Get() { return m_Wrapper.m_Default; }
         public void Enable() { Get().Enable(); }
@@ -273,12 +342,21 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnJump;
+                @Dodge.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnDodge;
+                @Dodge.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnDodge;
+                @Dodge.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnDodge;
                 @Attack.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnAttack;
                 @Skill1.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSkill1;
                 @Skill1.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSkill1;
                 @Skill1.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSkill1;
+                @Skill2.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSkill2;
+                @Skill2.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSkill2;
+                @Skill2.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSkill2;
+                @Skill3.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSkill3;
+                @Skill3.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSkill3;
+                @Skill3.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnSkill3;
                 @ShowDebugMenu.started -= m_Wrapper.m_DefaultActionsCallbackInterface.OnShowDebugMenu;
                 @ShowDebugMenu.performed -= m_Wrapper.m_DefaultActionsCallbackInterface.OnShowDebugMenu;
                 @ShowDebugMenu.canceled -= m_Wrapper.m_DefaultActionsCallbackInterface.OnShowDebugMenu;
@@ -292,12 +370,21 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Dodge.started += instance.OnDodge;
+                @Dodge.performed += instance.OnDodge;
+                @Dodge.canceled += instance.OnDodge;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
                 @Skill1.started += instance.OnSkill1;
                 @Skill1.performed += instance.OnSkill1;
                 @Skill1.canceled += instance.OnSkill1;
+                @Skill2.started += instance.OnSkill2;
+                @Skill2.performed += instance.OnSkill2;
+                @Skill2.canceled += instance.OnSkill2;
+                @Skill3.started += instance.OnSkill3;
+                @Skill3.performed += instance.OnSkill3;
+                @Skill3.canceled += instance.OnSkill3;
                 @ShowDebugMenu.started += instance.OnShowDebugMenu;
                 @ShowDebugMenu.performed += instance.OnShowDebugMenu;
                 @ShowDebugMenu.canceled += instance.OnShowDebugMenu;
@@ -309,8 +396,11 @@ public partial class @PlayerInputAsset : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnSkill1(InputAction.CallbackContext context);
+        void OnSkill2(InputAction.CallbackContext context);
+        void OnSkill3(InputAction.CallbackContext context);
         void OnShowDebugMenu(InputAction.CallbackContext context);
     }
 }

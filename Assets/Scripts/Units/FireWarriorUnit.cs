@@ -7,6 +7,8 @@ public class FireWarriorUnit : UnitBase
 	private FireWarriorUnitData _Data;
 	[SerializeField] private AnimatorController _AnimatorNormal;
 	[SerializeField] private AnimatorController _AnimatorFire;
+	[SerializeField] private Collider2D _LeftSwordCollider;
+	[SerializeField] private Collider2D _RightSwordCollider;
 	private InputHandler _Input; // playerInput
 
 	private const string IDLE = "Idle";
@@ -32,6 +34,7 @@ public class FireWarriorUnit : UnitBase
 		}
 		_Data.ResetData();
 		_Input = ServiceLocator.Get<InputHandler>();
+		EnableSwordCollider(false);
 	}
 
 	private void Start()
@@ -90,11 +93,37 @@ public class FireWarriorUnit : UnitBase
 	public void OnAttackAnimationEnd()
 	{
 		_Data.IsAttacking = false;
+		EnableSwordCollider(false);
+	}
+
+	public void OnSwordSwing()
+	{
+		EnableSwordCollider(true);
 	}
 
 	public void OnTransformationAnimationEnd()
 	{
 		EndTransformation(true);
+	}
+
+	private void EnableSwordCollider(bool enable)
+	{
+		if (enable)
+		{
+			if (IsFacingRight())
+			{
+				_RightSwordCollider.gameObject.SetActive(true);
+			}
+			else
+			{
+				_LeftSwordCollider.gameObject.SetActive(true);
+			}
+		}
+		else
+		{
+			_RightSwordCollider.gameObject.SetActive(false);
+			_LeftSwordCollider.gameObject.SetActive(false);
+		}
 	}
 
 	private void EndTransformation(bool transformationSuccess)

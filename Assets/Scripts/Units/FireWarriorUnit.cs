@@ -20,7 +20,7 @@ public class FireWarriorUnit : UnitBase
 	private const string ATTACK = "Attack";
 	private const string TRANSFORMATION = "Transformation";
 
-	// TODO: Proper transformation. Fire Mode. Also change sprite + animator controller based on fire mode or not. Colliders depends on sprite.
+	// TODO: Fire Mode.
 	// maybe do DodgeAmount as well and move some functionalities to a separate PlayerUnitBase
 
 	protected override void Awake()
@@ -36,8 +36,7 @@ public class FireWarriorUnit : UnitBase
 		_Input = ServiceLocator.Get<InputHandler>();
 		_LeftSwordCollider.SetParent(gameObject);
 		_RightSwordCollider.SetParent(gameObject);
-		_LeftSwordCollider.SetDamageAmount(_Data.Attack);
-		_RightSwordCollider.SetDamageAmount(_Data.Attack);
+		SetAttackDamage(_Data.GetAttack());
 		EnableSwordCollider(false);
 	}
 
@@ -50,7 +49,7 @@ public class FireWarriorUnit : UnitBase
 	{
 		if (IsGrounded())
 		{
-			_Data.JumpAmountLeft = _Data.JumpAmount;
+			_Data.JumpAmountLeft = _Data._IsFireMode ? _Data.JumpAmount + _Data.ExtraJumpAmount : _Data.JumpAmount;
 		}
 
 		if (_Data.IsDodging())
@@ -110,6 +109,12 @@ public class FireWarriorUnit : UnitBase
 		EndTransformation(true);
 	}
 
+	private void SetAttackDamage(float attack)
+	{
+		_LeftSwordCollider.SetDamageAmount(attack);
+		_RightSwordCollider.SetDamageAmount(attack);
+	}
+
 	private void EnableSwordCollider(bool enable)
 	{
 		if (enable)
@@ -136,23 +141,22 @@ public class FireWarriorUnit : UnitBase
 
 		if (transformationSuccess)
 		{
-			_Data._IsFireMode = !_Data._IsFireMode;
-			ChangeMode(_Data._IsFireMode);
+			ChangeMode();
 		}
 	}
 	
-	private void ChangeMode(bool isFireMode)
+	private void ChangeMode()
 	{
-		if (isFireMode)
+		_Data._IsFireMode = !_Data._IsFireMode;
+		if (_Data._IsFireMode)
 		{
-			// change to fire mode
 			_Animator.runtimeAnimatorController = _AnimatorFire;
 		}
 		else
 		{
-			// change to normal mode
 			_Animator.runtimeAnimatorController = _AnimatorNormal;
 		}
+		SetAttackDamage(_Data.GetAttack());
 	}
 
 	private bool IsGrounded()

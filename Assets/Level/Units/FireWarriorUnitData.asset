@@ -15,7 +15,7 @@ MonoBehaviour:
   MaxHealth: 25
   Health: 25
   Attack: 1
-  IsFacingRight: 0
+  IsFacingRight: 1
   BaseMoveSpeed: 4.5
   IsAttacking: 0
   XTolerance: 0.01
@@ -28,5 +28,10 @@ MonoBehaviour:
   DodgeCooldown: 2
   DodgeCooldownLeft: 0
   DodgeSpeed: 14
-  _IsFireMode: 0
+  _IsFireMode: 1
   _IsTransforming: 0
+  LifeStealAmount: 0.5
+  LifeDrainAmount: 0.5
+  LifeDrainTick: 1
+  ExtraAttack: 1
+  ExtraJumpAmount: 1

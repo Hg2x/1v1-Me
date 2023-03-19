@@ -1,12 +1,11 @@
-using System.Data;
 using UnityEngine;
 
-public class MeleeCollider : MonoBehaviour
+[RequireComponent(typeof(Collider2D))]
+public class DamageCollider : MonoBehaviour
 {
 	protected GameObject _Parent;
 	protected float _DamageAmount;
 
-	// Declare an event delegate for successful damage dealing
 	public delegate void DamageDealtDelegate();
 	public event DamageDealtDelegate OnDamageDealt;
 
@@ -33,8 +32,6 @@ public class MeleeCollider : MonoBehaviour
 			damagable.TakeDamage(_DamageAmount);
 			OnDamageDealt?.Invoke();
 		}
-
-		//Debug.Log("collided " + go.name);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -50,7 +47,5 @@ public class MeleeCollider : MonoBehaviour
 			damagable.TakeDamage(_DamageAmount);
 			OnDamageDealt?.Invoke();
 		}
-
-		//Debug.Log("triggered " + go.name);
 	}
 }

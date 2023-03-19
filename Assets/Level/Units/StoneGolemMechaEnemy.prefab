@@ -97,6 +97,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b29807472651fa4e83420bac2c488e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4142374720319362019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5107259574704666131}
+  m_Layer: 0
+  m_Name: ArmProjectileSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5107259574704666131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142374720319362019}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.84, y: 2.06, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6552887812067551017}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4335575676573595985
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6552887812067551017}
   - component: {fileID: 8661694574368021140}
+  - component: {fileID: -6980713184283164039}
   - component: {fileID: 62128263147596812}
   - component: {fileID: 2416012073361715608}
   - component: {fileID: -8098145189197547787}
@@ -229,6 +261,7 @@ Transform:
   m_Children:
   - {fileID: 7779805295459991965}
   - {fileID: 7767648954152057856}
+  - {fileID: 5107259574704666131}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -247,6 +280,20 @@ MonoBehaviour:
   _DataBaseForm: {fileID: 11400000, guid: 44a3cdc5504624d418ed544c7c8d3b4a, type: 2}
   _LeftMeleeCollider: {fileID: 3018483223451397383}
   _RightMeleeCollider: {fileID: 8722631150190811207}
+  _ProjectilePrefab: {fileID: 2263267970496346031, guid: 7cba94af9a2433a45ae94b573db3a44c, type: 3}
+--- !u!114 &-6980713184283164039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8375840731471489694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8735037eb0888be42ac1472b525b6f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ProjectileSpawnPoint: {fileID: 5107259574704666131}
 --- !u!212 &62128263147596812
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -288,7 +335,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1822235547, guid: ee51f69d6fa86bd469915cded39173a9, type: 3}
+  m_Sprite: {fileID: -1730575210, guid: ee51f69d6fa86bd469915cded39173a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -356,8 +403,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.39344263, y: 0}
-    oldSize: {x: 3.8125, y: 3}
+    pivot: {x: 0.34285715, y: 0}
+    oldSize: {x: 4.375, y: 2.875}
     newSize: {x: 3, y: 2.875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -5,8 +5,10 @@ using UnityEngine;
 public class StoneMechaGolemUnit : UnitBase
 {
 	private StoneMechaGolemUnitData _Data;
-	[SerializeField] private MeleeCollider _LeftMeleeCollider;
-	[SerializeField] private MeleeCollider _RightMeleeCollider;
+	[SerializeField] private DamageCollider _LeftMeleeCollider;
+	[SerializeField] private DamageCollider _RightMeleeCollider;
+	[SerializeField] private StoneMechaGolemArmProjectile _ProjectilePrefab;
+	private GolemProjectilePool _ProjectilePool;
 
 	private const string IDLE = "Idle";
 	private const string ATTACK = "Attack";
@@ -26,9 +28,14 @@ public class StoneMechaGolemUnit : UnitBase
 			return;
 		}
 		_Data.ResetData();
+		SetAttackDamage(_Data.GetAttack());
 		_LeftMeleeCollider.SetParent(gameObject);
 		_RightMeleeCollider.SetParent(gameObject);
-		SetAttackDamage(_Data.GetAttack());
+		if (gameObject.TryGetComponent(out GolemProjectilePool pool))
+		{
+			_ProjectilePool = pool;
+			_ProjectilePool.Initialize(_Data, _ProjectilePrefab);
+		}
 	}
 
 	private void Start()
@@ -44,9 +51,15 @@ public class StoneMechaGolemUnit : UnitBase
 		if (_ElapsedTime >= 1)
 		{
 			_ElapsedTime -= 1;
+
+			// TODO: make combine animations to make reusable attack patterns
 			if (_CurrentAnimation == IDLE)
 			{
 				ChangeAnimationState(SHOOT_ARM);
+			}
+			else if (_CurrentAnimation == SHOOT_ARM)
+			{
+				ChangeAnimationState(ATTACK);
 			}
 			else
 			{
@@ -67,7 +80,7 @@ public class StoneMechaGolemUnit : UnitBase
 
 	public void OnShootArm()
 	{
-		Debug.Log("Shot arm");
+		_ProjectilePool.LaunchProjectile(); // Normal shoot
 	}
 
 	private void SetAttackDamage(float attack)

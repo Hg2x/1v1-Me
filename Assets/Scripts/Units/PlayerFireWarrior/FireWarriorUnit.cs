@@ -1,12 +1,11 @@
 using ICKT.Services;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class FireWarriorUnit : UnitBase
 {
 	private FireWarriorUnitData _Data;
-	[SerializeField] private AnimatorController _AnimatorNormal;
-	[SerializeField] private AnimatorController _AnimatorFire;
+	[SerializeField] private RuntimeAnimatorController _AnimatorNormal;
+	[SerializeField] private RuntimeAnimatorController _AnimatorFire;
 	[SerializeField] private DamageCollider _LeftSwordCollider;
 	[SerializeField] private DamageCollider _RightSwordCollider;
 	private InputHandler _Input; // playerInput

@@ -5,6 +5,8 @@ using UnityEngine;
 public class StoneMechaGolemUnit : UnitBase
 {
 	private StoneMechaGolemUnitData _Data;
+	[SerializeField] private MeleeCollider _LeftMeleeCollider;
+	[SerializeField] private MeleeCollider _RightMeleeCollider;
 
 	private const string IDLE = "Idle";
 	private const string ATTACK = "Attack";
@@ -24,6 +26,9 @@ public class StoneMechaGolemUnit : UnitBase
 			return;
 		}
 		_Data.ResetData();
+		_LeftMeleeCollider.SetParent(gameObject);
+		_RightMeleeCollider.SetParent(gameObject);
+		SetAttackDamage(_Data.GetAttack());
 	}
 
 	private void Start()
@@ -48,5 +53,21 @@ public class StoneMechaGolemUnit : UnitBase
 				ChangeAnimationState(IDLE);
 			}
 		}
+	}
+
+	public void OnArmSwing()
+	{
+		_RightMeleeCollider.gameObject.SetActive(true);
+	}
+
+	public void OnArmSwingEnd()
+	{
+		_RightMeleeCollider.gameObject.SetActive(false);
+	}
+
+	private void SetAttackDamage(float attack)
+	{
+		_LeftMeleeCollider.SetDamageAmount(attack);
+		_RightMeleeCollider.SetDamageAmount(attack);
 	}
 }

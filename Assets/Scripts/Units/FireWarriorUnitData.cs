@@ -23,7 +23,7 @@ public class FireWarriorUnitData : PlayerUnitData
 		LifeDrainTickLeft = 0;
 	}
 
-	public float GetAttack()
+	public override float GetAttack()
 	{
 		return IsFireMode ? Attack + ExtraAttack : Attack;
 	}

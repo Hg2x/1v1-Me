@@ -19,4 +19,9 @@ public abstract class UnitDataBase : ScriptableObject
 		IsAttacking = false;
 		IsFacingRight = true;
 	}
+
+	public virtual float GetAttack()
+	{
+		return Attack;
+	}
 }

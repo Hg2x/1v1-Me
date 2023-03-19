@@ -1,7 +1,7 @@
 using UnityEngine;
 using static ICKT.Editor.EditorLibrary;
 
-[CreateAssetMenu(fileName = "FireWarriorUnitData", menuName = "ScriptableObject/UnitData/FireWarriorUnitData")]
+[CreateAssetMenu(fileName = "FireWarriorUnitData", menuName = "ScriptableObject/PlayerUnitData/FireWarriorUnitData")]
 public class FireWarriorUnitData : PlayerUnitData
 {
 	[Header("Fire Warrior Specific")]

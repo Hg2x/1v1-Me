@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireWarriorUnit : UnitBase
 {
-	[SerializeField] private FireWarriorUnitData _Data;
+	private FireWarriorUnitData _Data;
 	[SerializeField] private AnimatorController _AnimatorNormal;
 	[SerializeField] private AnimatorController _AnimatorFire;
 	private InputHandler _Input; // playerInput
@@ -24,6 +24,12 @@ public class FireWarriorUnit : UnitBase
 	protected override void Awake()
 	{
 		base.Awake();
+		_Data = _InitData as FireWarriorUnitData;
+		if (_Data == null)
+		{
+			Debug.LogError("FireWarriorUnitData initialize cast failed");
+			return;
+		}
 		_Data.ResetData();
 		_Input = ServiceLocator.Get<InputHandler>();
 	}
@@ -205,7 +211,7 @@ public class FireWarriorUnit : UnitBase
 		}
 	}
 
-	private void ChangeAnimationState(string newAnimation)
+	protected override void ChangeAnimationState(string newAnimation)
 	{
 		if (_CurrentAnimation == newAnimation)
 		{

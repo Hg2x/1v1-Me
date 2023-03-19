@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b84bbf47ef081d4fa2c51c7f1b38a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Data: {fileID: 11400000, guid: d951b5cbde58c89499d9c6493544ca62, type: 2}
+  _InitData: {fileID: 11400000, guid: d951b5cbde58c89499d9c6493544ca62, type: 2}
   _AnimatorNormal: {fileID: 9100000, guid: a5d5b1d68addbad448581f134c954aed, type: 2}
   _AnimatorFire: {fileID: 9100000, guid: b5be73b49fbe4ea48a348e16ea3afe41, type: 2}
 --- !u!50 &8554771380298895626

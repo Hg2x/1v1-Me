@@ -19,8 +19,9 @@ public class StoneMechaGolemArmProjectile : DamageCollider
 	public void Launch(float projectileSpeed, Vector2 direction, bool isGlowing = false)
 	{
 		SetGlow(isGlowing);
-		FlipSprite(direction.x < 0);
-		// TODO: set rotation depending on direction
+		FlipSpriteY(direction.x < 0);
+		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // get angle between x-axis and direction
+		transform.rotation = Quaternion.Euler(0, 0, angle);
 		_Rigidbody.velocity = direction.normalized * projectileSpeed;
 	}
 
@@ -29,8 +30,8 @@ public class StoneMechaGolemArmProjectile : DamageCollider
 		_Animator.SetBool("IsGlowing", isGlowing);
 	}
 
-	private void FlipSprite(bool doFlip)
+	private void FlipSpriteY(bool doFlip)
 	{
-		_SpriteRenderer.flipX = doFlip;
+		_SpriteRenderer.flipY = doFlip;
 	}
 }

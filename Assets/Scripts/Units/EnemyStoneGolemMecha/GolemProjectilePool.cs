@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UIElements;
 
 public class GolemProjectilePool : MonoBehaviour
 {
@@ -21,21 +22,27 @@ public class GolemProjectilePool : MonoBehaviour
 		_ProjectilePrefab = projectilePrefab;
 	}
 
-	private void Update()
+	public void LaunchNormalProjectile(Vector2? targetPosition = null)
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			LaunchProjectile();
-		}
+		LaunchProjectile(false, targetPosition);
 	}
 
-	public void LaunchProjectile(bool isGlowing = false)
+	private void LaunchProjectile(bool isGlowing = false, Vector2 ? targetPosition = null)
 	{
 		var projectile = _Pool.Get();
 
 		projectile.SetDamageAmount(_Data.GetAttack());
 		projectile.transform.position = _ProjectileSpawnPoint.position;
-		projectile.Launch(_Data.ProjectileSpeed, _ProjectileSpawnPoint.right, isGlowing);
+		Vector2 direction;
+		if (targetPosition == null)
+		{
+			direction = _ProjectileSpawnPoint.right; // TODO: flip this if flipped
+		}
+		else
+		{
+			direction = ((Vector2)targetPosition - (Vector2)projectile.transform.position).normalized;
+		}
+		projectile.Launch(_Data.ProjectileSpeed, direction, isGlowing);
 
 		StartCoroutine(ReturnProjectileToPool(projectile, _Data.ProjectileDuration));
 	}

@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour, IRegisterable
 {
-	[SerializeField] private FireWarriorUnit _PlayerUnitReference;
+	[SerializeField] private FireWarriorUnit _PlayerUnitPrefab;
+	[SerializeField] private StoneMechaGolemUnit _EnemyUnitPrefab;
+	private FireWarriorUnit _PlayerUnit;
+	public Transform PlayerTransform
+	{
+		get { return _PlayerUnit ? _PlayerUnit.transform : null; }
+	}
+	private StoneMechaGolemUnit _EnemyUnit;
 
-    private float _ElapsedTime = 0;
+	private float _ElapsedTime = 0;
 	private float _TotalTime = 0;
 
 	public delegate void SecondPassedHandler(float totalTime);
@@ -22,7 +29,10 @@ public class LevelManager : MonoBehaviour, IRegisterable
 
 	private void Start()
 	{
-		Instantiate(_PlayerUnitReference);
+		_PlayerUnit = Instantiate(_PlayerUnitPrefab);
+
+		Vector3 enemyPosition = _PlayerUnit.transform.position + Vector3.left * 4f;
+		_EnemyUnit = Instantiate(_EnemyUnitPrefab, enemyPosition, Quaternion.identity);
 	}
 
 	private void OnDestroy()

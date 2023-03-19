@@ -1,6 +1,8 @@
+using ICKT.Services;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class StoneMechaGolemUnit : UnitBase
 {
@@ -88,7 +90,8 @@ public class StoneMechaGolemUnit : UnitBase
 
 	public void OnShootArm()
 	{
-		_ProjectilePool.LaunchProjectile(); // Normal shoot
+		var targetPosition = ServiceLocator.Get<LevelManager>().PlayerTransform.position;
+		_ProjectilePool.LaunchNormalProjectile((Vector2)targetPosition); // Normal shoot
 	}
 
 	public void StartLaser()

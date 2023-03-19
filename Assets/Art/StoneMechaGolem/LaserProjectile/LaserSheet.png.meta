@@ -301,11 +301,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 30
-        y: 546
+        y: 545
         width: 270
-        height: 44
+        height: 45
       alignment: 9
-      pivot: {x: 0.08148148, y: 0.4659091}
+      pivot: {x: 0.08148148, y: 0.45555556}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

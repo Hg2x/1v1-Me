@@ -8,6 +8,8 @@ public class StoneMechaGolemUnit : UnitBase
 	[SerializeField] private DamageCollider _LeftMeleeCollider;
 	[SerializeField] private DamageCollider _RightMeleeCollider;
 	[SerializeField] private StoneMechaGolemArmProjectile _ProjectilePrefab;
+	[SerializeField] private StoneMechaGolemLaserProjectile _LaserPrefab;
+	[SerializeField] private Transform _LaserSpawnPoint;
 	private GolemProjectilePool _ProjectilePool;
 
 	private const string IDLE = "Idle";
@@ -31,6 +33,8 @@ public class StoneMechaGolemUnit : UnitBase
 		SetAttackDamage(_Data.GetAttack());
 		_LeftMeleeCollider.SetParent(gameObject);
 		_RightMeleeCollider.SetParent(gameObject);
+		_LaserPrefab.SetParent(gameObject);
+		_LaserPrefab.SetDamageAmount(_Data.GetAttack());
 		if (gameObject.TryGetComponent(out GolemProjectilePool pool))
 		{
 			_ProjectilePool = pool;
@@ -61,6 +65,10 @@ public class StoneMechaGolemUnit : UnitBase
 			{
 				ChangeAnimationState(ATTACK);
 			}
+			else if (_CurrentAnimation == ATTACK)
+			{
+				ChangeAnimationState(SHOOT_LASER);
+			}
 			else
 			{
 				ChangeAnimationState(IDLE);
@@ -81,6 +89,13 @@ public class StoneMechaGolemUnit : UnitBase
 	public void OnShootArm()
 	{
 		_ProjectilePool.LaunchProjectile(); // Normal shoot
+	}
+
+	public void StartLaser()
+	{
+		// TODO: change to left/right direction
+		_LaserPrefab.transform.position = _LaserSpawnPoint.transform.position;
+		_LaserPrefab.StartCharge();
 	}
 
 	private void SetAttackDamage(float attack)

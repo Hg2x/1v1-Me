@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
 public class DamageCollider : MonoBehaviour
 {
 	protected GameObject _Parent;

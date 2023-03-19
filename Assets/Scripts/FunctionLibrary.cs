@@ -1,3 +1,4 @@
+using ICKT.Services;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace ICKT
 {
-    public class FunctionLibrary : MonoBehaviour
+    public class FunctionLibrary
     {
         #region Pseudo-Random Number Generators
         public static bool GetRandomBool()
@@ -95,5 +96,22 @@ namespace ICKT
                 }
             }
         }
-    }
+
+		// Project specific
+		public static Quaternion GetRotationToPlayer2D(Vector2 position)
+		{
+            if (ServiceLocator.IsRegistered<LevelManager>())
+            {
+                Transform playerTransform = ServiceLocator.Get<LevelManager>().PlayerTransform;
+				if (playerTransform)
+                {
+					Vector2 playerPosition = playerTransform.position;
+					Vector2 direction = (playerPosition - position).normalized;
+					float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // get angle between x-axis and direction
+					return Quaternion.Euler(0, 0, angle);
+				}
+			}
+            return Quaternion.identity;
+		}
+	}
 }

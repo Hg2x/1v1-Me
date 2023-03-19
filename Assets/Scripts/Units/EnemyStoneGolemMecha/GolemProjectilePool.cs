@@ -1,7 +1,7 @@
+using ICKT.Services;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.UIElements;
 
 public class GolemProjectilePool : MonoBehaviour
 {
@@ -22,26 +22,19 @@ public class GolemProjectilePool : MonoBehaviour
 		_ProjectilePrefab = projectilePrefab;
 	}
 
-	public void LaunchNormalProjectile(Vector2? targetPosition = null)
+	public void LaunchNormalProjectile()
 	{
-		LaunchProjectile(false, targetPosition);
+		LaunchProjectileToPlayer(false);
 	}
 
-	private void LaunchProjectile(bool isGlowing = false, Vector2 ? targetPosition = null)
+	private void LaunchProjectileToPlayer(bool isGlowing = false)
 	{
 		var projectile = _Pool.Get();
 
 		projectile.SetDamageAmount(_Data.GetAttack());
-		projectile.transform.position = _ProjectileSpawnPoint.position;
-		Vector2 direction;
-		if (targetPosition == null)
-		{
-			direction = _ProjectileSpawnPoint.right; // TODO: flip this if flipped
-		}
-		else
-		{
-			direction = ((Vector2)targetPosition - (Vector2)projectile.transform.position).normalized;
-		}
+		projectile.transform.position = _ProjectileSpawnPoint.position; // TODO: inverse this if golem is facing left
+		Vector3 playerPosition = ServiceLocator.Get<LevelManager>().PlayerTransform.position;
+		Vector2 direction = ((Vector2)playerPosition - (Vector2)projectile.transform.position).normalized;
 		projectile.Launch(_Data.ProjectileSpeed, direction, isGlowing);
 
 		StartCoroutine(ReturnProjectileToPool(projectile, _Data.ProjectileDuration));

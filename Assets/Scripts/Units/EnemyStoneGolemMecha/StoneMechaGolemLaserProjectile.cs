@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using ICKT;
 using UnityEngine;
 
 public class StoneMechaGolemLaserProjectile : DamageCollider
@@ -16,11 +15,6 @@ public class StoneMechaGolemLaserProjectile : DamageCollider
 	{
 		_Animator = GetComponent<Animator>();
 		_LaserDuration = _Animator.GetFloat(LASER_DURATION);
-	}
-
-	private void OnEnable()
-	{
-		
 	}
 
 	public void OnShootLaser()
@@ -48,6 +42,8 @@ public class StoneMechaGolemLaserProjectile : DamageCollider
 			_LaserDuration = 1.5f;
 		}
 
+		// NORMAL STRAIGHT LASER
+		transform.rotation = FunctionLibrary.GetRotationToPlayer2D((Vector2)transform.position);
 		gameObject.SetActive(true);
 		_Animator.Play(CHARGE_LASER);
 		_Animator.SetFloat("PlaybackSpeed", chargeSpeedMulitplier);

@@ -2,13 +2,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
-public abstract class UnitBase : MonoBehaviour
+public abstract class UnitBase : MonoBehaviour, IDamagable
 {
-	[SerializeField] protected UnitDataBase _InitData; // TODO: use another way to fetch this if there's time
+	[SerializeField] protected UnitDataBase _DataBaseForm; // TODO: use another way to fetch this if there's time
 	protected Rigidbody2D _Rigidbody;
 	private SpriteRenderer _SpriteRenderer;
 	protected Animator _Animator;
 	protected string _CurrentAnimation;
+
+	public virtual void TakeDamage(float damageAmount)
+	{
+		_DataBaseForm.Health -= damageAmount;
+		Debug.Log(gameObject.name +" " + damageAmount + " damage taken");
+	}
 
 	protected virtual void Awake()
 	{

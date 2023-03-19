@@ -17,7 +17,7 @@ public class StoneMechaGolemUnit : UnitBase
 	protected override void Awake()
 	{
 		base.Awake();
-		_Data = _InitData as StoneMechaGolemUnitData;
+		_Data = _DataBaseForm as StoneMechaGolemUnitData;
 		if (_Data == null)
 		{
 			Debug.LogError("StoneMechaGolemUnitData initialize cast failed");

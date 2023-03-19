@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8ceec38e215254a883d62d6d25d81d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _InitData: {fileID: 11400000, guid: 44a3cdc5504624d418ed544c7c8d3b4a, type: 2}
+  _DataBaseForm: {fileID: 11400000, guid: 44a3cdc5504624d418ed544c7c8d3b4a, type: 2}
 --- !u!212 &62128263147596812
 SpriteRenderer:
   m_ObjectHideFlags: 0

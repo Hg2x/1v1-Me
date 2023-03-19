@@ -4,7 +4,8 @@ using static ICKT.Editor.EditorLibrary;
 public abstract class UnitDataBase : ScriptableObject
 {
 	[Header("Base Unit Related")]
-	[Min(0)] public float Health = 10;
+	[Min(0)] public float MaxHealth = 10;
+	[ReadOnlyField] public float Health;
 	[Min(0)] public float Attack = 1;
 	[ReadOnlyField] public bool IsFacingRight;
 	[Min(0)] public float BaseMoveSpeed;
@@ -14,6 +15,7 @@ public abstract class UnitDataBase : ScriptableObject
 
 	public virtual void ResetData()
 	{
+		Health = MaxHealth;
 		IsAttacking = false;
 		IsFacingRight = true;
 	}

@@ -7,8 +7,8 @@ public class FireWarriorUnit : UnitBase
 	private FireWarriorUnitData _Data;
 	[SerializeField] private AnimatorController _AnimatorNormal;
 	[SerializeField] private AnimatorController _AnimatorFire;
-	[SerializeField] private Collider2D _LeftSwordCollider;
-	[SerializeField] private Collider2D _RightSwordCollider;
+	[SerializeField] private MeleeCollider _LeftSwordCollider;
+	[SerializeField] private MeleeCollider _RightSwordCollider;
 	private InputHandler _Input; // playerInput
 
 	private const string IDLE = "Idle";
@@ -26,7 +26,7 @@ public class FireWarriorUnit : UnitBase
 	protected override void Awake()
 	{
 		base.Awake();
-		_Data = _InitData as FireWarriorUnitData;
+		_Data = _DataBaseForm as FireWarriorUnitData;
 		if (_Data == null)
 		{
 			Debug.LogError("FireWarriorUnitData initialize cast failed");
@@ -34,6 +34,10 @@ public class FireWarriorUnit : UnitBase
 		}
 		_Data.ResetData();
 		_Input = ServiceLocator.Get<InputHandler>();
+		_LeftSwordCollider.SetParent(gameObject);
+		_RightSwordCollider.SetParent(gameObject);
+		_LeftSwordCollider.SetDamageAmount(_Data.Attack);
+		_RightSwordCollider.SetDamageAmount(_Data.Attack);
 		EnableSwordCollider(false);
 	}
 

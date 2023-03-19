@@ -6,6 +6,10 @@ public class MeleeCollider : MonoBehaviour
 	protected GameObject _Parent;
 	protected float _DamageAmount;
 
+	// Declare an event delegate for successful damage dealing
+	public delegate void DamageDealtDelegate();
+	public event DamageDealtDelegate OnDamageDealt;
+
 	public void SetParent(GameObject parent)
 	{
 		_Parent = parent;
@@ -27,6 +31,7 @@ public class MeleeCollider : MonoBehaviour
 		if (go.TryGetComponent(out IDamagable damagable))
 		{
 			damagable.TakeDamage(_DamageAmount);
+			OnDamageDealt?.Invoke();
 		}
 
 		//Debug.Log("collided " + go.name);
@@ -43,6 +48,7 @@ public class MeleeCollider : MonoBehaviour
 		if (go.TryGetComponent(out IDamagable damagable))
 		{
 			damagable.TakeDamage(_DamageAmount);
+			OnDamageDealt?.Invoke();
 		}
 
 		//Debug.Log("triggered " + go.name);

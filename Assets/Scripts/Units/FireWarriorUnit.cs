@@ -45,11 +45,25 @@ public class FireWarriorUnit : UnitBase
 		ChangeAnimationState(IDLE);
 	}
 
+	private void OnEnable()
+	{
+		_LeftSwordCollider.OnDamageDealt += OnSwordSwingDamageDealt;
+		_RightSwordCollider.OnDamageDealt += OnSwordSwingDamageDealt;
+	}
+
+	private void OnSwordSwingDamageDealt()
+	{
+		if (_Data.IsFireMode)
+		{
+			TakeDamage(-_Data.LifeDrainAmount);
+		}
+	}
+
 	private void FixedUpdate()
 	{
 		if (IsGrounded())
 		{
-			_Data.JumpAmountLeft = _Data._IsFireMode ? _Data.JumpAmount + _Data.ExtraJumpAmount : _Data.JumpAmount;
+			_Data.JumpAmountLeft = _Data.IsFireMode ? _Data.JumpAmount + _Data.ExtraJumpAmount : _Data.JumpAmount;
 		}
 
 		if (_Data.IsDodging())
@@ -65,7 +79,17 @@ public class FireWarriorUnit : UnitBase
 
 	private void Update()
 	{
-		if (_Input.DoJump && _Data.CanJump())// && isGrounded)
+		if (_Data.IsFireMode) 
+		{
+			_Data.LifeDrainTickLeft -= Time.deltaTime; // life drain during fire mode
+			if (_Data.LifeDrainTickLeft <= 0) 
+			{
+				TakeDamage(_Data.LifeDrainAmount);
+				_Data.LifeDrainTickLeft += _Data.LifeDrainTick;
+			}
+		}
+
+		if (_Input.DoJump && _Data.CanJump())
 		{
 			_Rigidbody.velocity = new(_Rigidbody.velocity.x, 0);
 			_Rigidbody.AddForce(Vector2.up * _Data.JumpForce, ForceMode2D.Impulse);
@@ -137,7 +161,7 @@ public class FireWarriorUnit : UnitBase
 
 	private void EndTransformation(bool transformationSuccess)
 	{
-		_Data._IsTransforming = false;
+		_Data.IsTransforming = false;
 
 		if (transformationSuccess)
 		{
@@ -147,8 +171,8 @@ public class FireWarriorUnit : UnitBase
 	
 	private void ChangeMode()
 	{
-		_Data._IsFireMode = !_Data._IsFireMode;
-		if (_Data._IsFireMode)
+		_Data.IsFireMode = !_Data.IsFireMode;
+		if (_Data.IsFireMode)
 		{
 			_Animator.runtimeAnimatorController = _AnimatorFire;
 		}
@@ -180,7 +204,7 @@ public class FireWarriorUnit : UnitBase
 
 	private void UpdateAnimation()
 	{
-		if (_Data.IsAttacking || _Data._IsTransforming)
+		if (_Data.IsAttacking || _Data.IsTransforming)
 		{
 			return;
 		}
@@ -189,7 +213,7 @@ public class FireWarriorUnit : UnitBase
 		if (_Input.DoSkill1 && IsGrounded())
 		{
 			ChangeAnimationState(TRANSFORMATION);
-			_Data._IsTransforming = true;
+			_Data.IsTransforming = true;
 			return;
 		}
 

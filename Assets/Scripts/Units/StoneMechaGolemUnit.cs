@@ -46,7 +46,7 @@ public class StoneMechaGolemUnit : UnitBase
 			_ElapsedTime -= 1;
 			if (_CurrentAnimation == IDLE)
 			{
-				ChangeAnimationState(ATTACK);
+				ChangeAnimationState(SHOOT_ARM);
 			}
 			else
 			{
@@ -63,6 +63,11 @@ public class StoneMechaGolemUnit : UnitBase
 	public void OnArmSwingEnd()
 	{
 		_RightMeleeCollider.gameObject.SetActive(false);
+	}
+
+	public void OnShootArm()
+	{
+		Debug.Log("Shot arm");
 	}
 
 	private void SetAttackDamage(float attack)

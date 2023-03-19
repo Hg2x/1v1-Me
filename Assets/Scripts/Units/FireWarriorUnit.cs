@@ -20,9 +20,6 @@ public class FireWarriorUnit : UnitBase
 	private const string ATTACK = "Attack";
 	private const string TRANSFORMATION = "Transformation";
 
-	// TODO: Fire Mode.
-	// maybe do DodgeAmount as well and move some functionalities to a separate PlayerUnitBase
-
 	protected override void Awake()
 	{
 		base.Awake();
@@ -209,14 +206,6 @@ public class FireWarriorUnit : UnitBase
 			return;
 		}
 
-		// Transformation to change mode
-		if (_Input.DoSkill1 && IsGrounded())
-		{
-			ChangeAnimationState(TRANSFORMATION);
-			_Data.IsTransforming = true;
-			return;
-		}
-
 		float xInput = _Input.InputMoveVector.x;
 		bool isMoving = Mathf.Abs(xInput) > _Data.XTolerance;
 		if (isMoving)
@@ -224,50 +213,48 @@ public class FireWarriorUnit : UnitBase
 			FlipSprite(!IsFacingRight());
 		}
 
-		if (IsGrounded())
+		bool isGrounded = IsGrounded();
+		bool isDodging = _Data.IsDodging();
+		bool doAttack = _Input.DoAttack;
+		bool doSkill1 = _Input.DoSkill1;
+
+		if (isGrounded)
 		{
-			if (_Data.IsDodging())
+			if (doSkill1)
+			{
+				ChangeAnimationState(TRANSFORMATION);
+				_Data.IsTransforming = true;
+			}
+			else if (isDodging)
 			{
 				ChangeAnimationState(DODGE_GROUND);
-				return;
 			}
-
-			if (_Input.DoAttack)
+			else if (doAttack)
 			{
 				ChangeAnimationState(ATTACK);
-				return;
 			}
-
-			if (isMoving)
+			else if (isMoving)
 			{
 				ChangeAnimationState(RUN);
-				return;
-			}
-
-			ChangeAnimationState(IDLE);
-		}
-		else
-		{
-			if (_Data.IsDodging())
-			{
-				ChangeAnimationState(DODGE_AIR);
-				return;
-			}
-
-			if (_Input.DoAttack)
-			{
-				ChangeAnimationState(ATTACK);
-				return;
-			}
-
-			if (Mathf.Sign(_Rigidbody.velocity.y) == 1f)
-			{
-				ChangeAnimationState(JUMP);
-				return;
 			}
 			else
 			{
-				ChangeAnimationState(FALL);
+				ChangeAnimationState(IDLE);
+			}
+		}
+		else
+		{
+			if (isDodging)
+			{
+				ChangeAnimationState(DODGE_AIR);
+			}
+			else if (doAttack)
+			{
+				ChangeAnimationState(ATTACK);
+			}
+			else
+			{
+				ChangeAnimationState(Mathf.Sign(_Rigidbody.velocity.y) == 1f ? JUMP : FALL);
 			}
 		}
 	}

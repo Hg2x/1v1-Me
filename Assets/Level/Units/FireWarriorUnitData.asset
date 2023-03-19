@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e16205db2b9cdd45a39cdbed68e6c43, type: 3}
   m_Name: FireWarriorUnitData
   m_EditorClassIdentifier: 
+  Health: 25
+  Attack: 1
   IsFacingRight: 0
   BaseMoveSpeed: 4.5
   IsAttacking: 0
   XTolerance: 0.01
   GroundedTolerance: 0.001
-  AttackCooldown: 0
   JumpForce: 8
   JumpAmount: 2
   JumpAmountLeft: 2

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb160bad538e0c746a6eb80840bcee24, type: 3}
   m_Name: StoneMechaGolemUnitData
   m_EditorClassIdentifier: 
+  Health: 100
+  Attack: 2
   IsFacingRight: 0
   BaseMoveSpeed: 0
   IsAttacking: 0

@@ -394,6 +394,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4270839139114488532, guid: 7f298d4ccaaf2b3448800b5c85c07df5, type: 3}
   m_PrefabInstance: {fileID: 4270839139188602707}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &290041227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 290041228}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &290041228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290041227}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.5, y: -3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 317981475}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &317981474
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,6 +456,8 @@ Transform:
   - {fileID: 1775217798}
   - {fileID: 1813145954}
   - {fileID: 517752036}
+  - {fileID: 290041228}
+  - {fileID: 1161361158}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1822,6 +1855,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6948361621281153815, guid: fad14de62c07fec49a5e21486697928d, type: 3}
   m_PrefabInstance: {fileID: 1065108859}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1161361157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1161361158}
+  m_Layer: 0
+  m_Name: EnemySpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1161361158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161361157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.25, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 317981475}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1171826217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3408,6 +3472,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7986323758494929607, guid: d37d518b9a89bd445bea425be6b46eb5, type: 3}
+      propertyPath: _EnemySpawnPoint
+      value: 
+      objectReference: {fileID: 1161361158}
+    - target: {fileID: 7986323758494929607, guid: d37d518b9a89bd445bea425be6b46eb5, type: 3}
+      propertyPath: _PlayerSpawnPoint
+      value: 
+      objectReference: {fileID: 290041228}
     - target: {fileID: 7986323758494929656, guid: d37d518b9a89bd445bea425be6b46eb5, type: 3}
       propertyPath: m_Name
       value: LevelManager

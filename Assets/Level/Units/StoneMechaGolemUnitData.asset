@@ -15,8 +15,12 @@ MonoBehaviour:
   MaxHealth: 100
   Health: 100
   Attack: 2
-  IsFacingRight: 0
+  IsFacingRight: 1
   BaseMoveSpeed: 0
   IsAttacking: 0
+  GravityScale: 0
   XTolerance: 0.01
   GroundedTolerance: 0.001
+  ProjectileSpeed: 5
+  IsGlowing: 0
+  ProjectileDuration: 3

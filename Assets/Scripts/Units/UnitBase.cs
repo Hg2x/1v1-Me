@@ -19,6 +19,7 @@ public abstract class UnitBase : MonoBehaviour, IDamagable
 	protected virtual void Awake()
 	{
 		_Rigidbody = GetComponent<Rigidbody2D>();
+		_Rigidbody.gravityScale = _DataBaseForm.GravityScale;
 		_SpriteRenderer = GetComponent<SpriteRenderer>();
 		_Animator = GetComponent<Animator>();
 	}

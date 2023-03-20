@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: FireWarriorUnitData
   m_EditorClassIdentifier: 
   MaxHealth: 25
-  Health: 25
+  Health: 23
   Attack: 1
   IsFacingRight: 1
   BaseMoveSpeed: 4.5
   IsAttacking: 0
+  GravityScale: 3
   XTolerance: 0.01
   GroundedTolerance: 0.001
-  JumpForce: 8
+  JumpForce: 12
   JumpAmount: 2
   JumpAmountLeft: 2
   DodgeDuration: 0.24
@@ -28,10 +29,11 @@ MonoBehaviour:
   DodgeCooldown: 2
   DodgeCooldownLeft: 0
   DodgeSpeed: 14
-  _IsFireMode: 1
-  _IsTransforming: 0
+  IsFireMode: 0
+  IsTransforming: 0
   LifeStealAmount: 0.5
   LifeDrainAmount: 0.5
   LifeDrainTick: 1
+  LifeDrainTickLeft: 0
   ExtraAttack: 1
   ExtraJumpAmount: 1

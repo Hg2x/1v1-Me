@@ -10,6 +10,7 @@ public abstract class UnitDataBase : ScriptableObject
 	[ReadOnlyField] public bool IsFacingRight;
 	[Min(0)] public float BaseMoveSpeed;
 	[ReadOnlyField] public bool IsAttacking = false;
+	public float GravityScale;
 	[Min(0)] public float XTolerance = 0.01f;
 	[Min(0)] public float GroundedTolerance = 0.001f;
 

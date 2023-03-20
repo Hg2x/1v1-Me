@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour, IRegisterable
 {
 	[SerializeField] private FireWarriorUnit _PlayerUnitPrefab;
 	[SerializeField] private StoneMechaGolemUnit _EnemyUnitPrefab;
+	[SerializeField] private Transform _PlayerSpawnPoint; // TODO: change fetching spawn point implementation
+	[SerializeField] private Transform _EnemySpawnPoint;
 	private FireWarriorUnit _PlayerUnit;
 	public Transform PlayerTransform
 	{
@@ -29,10 +31,8 @@ public class LevelManager : MonoBehaviour, IRegisterable
 
 	private void Start()
 	{
-		_PlayerUnit = Instantiate(_PlayerUnitPrefab);
-
-		Vector3 enemyPosition = _PlayerUnit.transform.position + Vector3.left * 4f;
-		_EnemyUnit = Instantiate(_EnemyUnitPrefab, enemyPosition, Quaternion.identity);
+		_PlayerUnit = Instantiate(_PlayerUnitPrefab, _PlayerSpawnPoint);
+		_EnemyUnit = Instantiate(_EnemyUnitPrefab, _EnemySpawnPoint);
 	}
 
 	private void OnDestroy()

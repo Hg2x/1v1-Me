@@ -1,3 +1,4 @@
+using ICKT;
 using ICKT.Services;
 using ICKT.UI;
 using UnityEngine;
@@ -27,5 +28,10 @@ public class UIBattle : UIBase
 		{
 			ServiceLocator.Get<LevelManager>().OnSecondPassed -= UIBattle_OnSecondPassed;
 		}
+	}
+
+	public void OnPauseButtonClicked()
+	{
+		UIManager.Show<UIPause>();
 	}
 }

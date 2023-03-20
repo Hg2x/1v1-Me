@@ -13,6 +13,7 @@ public class StoneMechaGolemUnit : UnitBase
 	[SerializeField] private Transform _LeftLaserSpawnPoint;
 	[SerializeField] private Transform _RightLaserSpawnPoint;
 	private GolemProjectilePool _ProjectilePool;
+	private Collider2D _OuterCollider;
 
 	public const string IDLE = "Idle";
 	public const string ATTACK = "Attack";
@@ -42,6 +43,13 @@ public class StoneMechaGolemUnit : UnitBase
 			_ProjectilePool = pool;
 			_ProjectilePool.Initialize(_Data, _ProjectilePrefab);
 		}
+
+		_OuterCollider = GetComponent<Collider2D>();
+	}
+
+	protected virtual void OnCollisionEnter2D(Collision2D collision) // TODO: implement a better way to ignore collision with player
+	{
+		Physics2D.IgnoreCollision(_OuterCollider, collision.collider, true);
 	}
 
 	private void Update()

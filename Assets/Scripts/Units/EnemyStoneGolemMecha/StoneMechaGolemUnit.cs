@@ -8,7 +8,8 @@ public class StoneMechaGolemUnit : UnitBase
 	[SerializeField] private DamageCollider _RightMeleeCollider;
 	[SerializeField] private StoneMechaGolemArmProjectile _ProjectilePrefab;
 	[SerializeField] private StoneMechaGolemLaserProjectile _LaserPrefab;
-	[SerializeField] private Transform _LaserSpawnPoint;
+	[SerializeField] private Transform _LeftLaserSpawnPoint;
+	[SerializeField] private Transform _RightLaserSpawnPoint;
 	private GolemProjectilePool _ProjectilePool;
 
 	public const string IDLE = "Idle";
@@ -97,16 +98,13 @@ public class StoneMechaGolemUnit : UnitBase
 
 	public void StartLaser()
 	{
-		// TODO: change to left/right direction
 		if (_Data.IsFacingRight)
 		{
-			_LaserPrefab.transform.position = _LaserSpawnPoint.position;
+			_LaserPrefab.transform.position = _RightLaserSpawnPoint.position;
 		}
 		else
 		{
-			Vector3 position = _LaserSpawnPoint.position;
-			position.x = -position.x;
-			_LaserPrefab.transform.position = position;
+			_LaserPrefab.transform.position = _LeftLaserSpawnPoint.position;
 		}
 		
 		_LaserPrefab.SetDamageAmount(_Data.GetAttack());

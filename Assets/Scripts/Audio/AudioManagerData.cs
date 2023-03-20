@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ICKT.Audio
 {
-	[CreateAssetMenu(fileName = "AudioManagerData", menuName = "Audio/ManagerData/AudioManagerData")]
+	[CreateAssetMenu(fileName = "AudioManagerData", menuName = "ScriptableObject/ManagerData/AudioManagerData")]
 	public class AudioManagerData : ScriptableObject
 	{
 		[Header("Audio Volume")]

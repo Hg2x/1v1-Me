@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using ICKT.Services;
 
 namespace ICKT.Audio
 {
-	public class AudioManager : MonoBehaviour
+	[AutoRegisteredService]
+	public class AudioManager : MonoBehaviour, IRegisterable
 	{
 		public static AudioManager Instance { get; private set; }
 
@@ -24,6 +26,8 @@ namespace ICKT.Audio
 		private List<StudioEventEmitter> _EventEmitters = new();
 		private EventInstance _MusicEventInstance;
 
+		public bool IsPersistent() => true;
+
 		private void Awake()
 		{
 			if (Instance == null)
@@ -37,7 +41,6 @@ namespace ICKT.Audio
 			else
 			{
 				Debug.LogError("Found more than one Audio Manager in the scene.");
-				Destroy(gameObject);
 			}
 		}
 
@@ -60,6 +63,12 @@ namespace ICKT.Audio
 			{
 				Debug.LogError("AudioManager is already initialized.");
 			}
+		}
+
+		public bool IsPlaying(EventInstance instance)
+		{
+			instance.getPlaybackState(out PLAYBACK_STATE state);
+			return state != PLAYBACK_STATE.STOPPED;
 		}
 
 		public void PlayOneShot(EventReference sound, Vector3 worldPos)

@@ -1,3 +1,4 @@
+using ICKT.Audio;
 using ICKT.Services;
 using ICKT.UI;
 using System;
@@ -13,6 +14,7 @@ namespace ICKT
 		private static ServiceLocator _ServiceLocator;
 		private UIManager _UIManager;
 		[SerializeField] private UIManagerData _UIManagerData;
+		[SerializeField] private AudioManagerData _AudioManagerData;
 
 		private void Awake()
 		{
@@ -26,6 +28,7 @@ namespace ICKT
 			_ServiceLocator.Initialize();
 			_UIManager = gameObject.AddComponent<UIManager>();
 			_UIManager.Init(_UIManagerData);
+			ServiceLocator.Get<AudioManager>().Initialize(_AudioManagerData);
 			DontDestroyOnLoad(_Instance);
 		}
 

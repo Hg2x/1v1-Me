@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _UIManagerData: {fileID: 11400000, guid: 65178ca478e8c7e40887c6b81abade7c, type: 2}
+  _AudioManagerData: {fileID: 11400000, guid: 9ed12bfd49431c24ab1c581ad78e86da, type: 2}

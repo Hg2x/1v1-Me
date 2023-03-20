@@ -1,4 +1,8 @@
+using FMOD.Studio;
+using FMODUnity;
+using ICKT.Audio;
 using ICKT.Services;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FireWarriorUnit : UnitBase
@@ -9,6 +13,16 @@ public class FireWarriorUnit : UnitBase
 	[SerializeField] private DamageCollider _LeftSwordCollider;
 	[SerializeField] private DamageCollider _RightSwordCollider;
 	private InputHandler _Input; // playerInput
+
+	// TODO: clean up and streamline all the SFX code and assets
+	private AudioManager _AudioManager;
+	[SerializeField] private List<EventReference> _SfxEventReferences;
+	private const string DODGE_AIR_SFX_PATH = "event:/Sfx/FireWarrior/DodgeAir";
+	private const string DODGE_GROUND_SFX_PATH = "event:/Sfx/FireWarrior/DodgeGround";
+	private const string JUMP_SFX_PATH = "event:/Sfx/FireWarrior/Jump";
+	private const string SWORD_HIT_NORMAL_SFX_PATH = "event:/Sfx/FireWarrior/SwordHit_Normal";
+	private const string SWORD_HIT_FIRE_SFX_PATH = "event:/Sfx/FireWarrior/SwordHit_Fire";
+	private const string TAKE_DAMAGE_SFX_PATH = "event:/Sfx/FireWarrior/TakeDamage";
 
 	private const string IDLE = "Idle";
 	private const string RUN = "Run";
@@ -34,6 +48,14 @@ public class FireWarriorUnit : UnitBase
 		_RightSwordCollider.SetParent(gameObject);
 		SetAttackDamage(_Data.GetAttack());
 		EnableSwordCollider(false);
+
+		_AudioManager = ServiceLocator.Get<AudioManager>();
+		foreach(var sfx in _SfxEventReferences)
+		{
+			_AudioManager.CreateInstance(sfx);
+		}
+		_LeftSwordCollider.SetHitSfx(SWORD_HIT_NORMAL_SFX_PATH);
+		_RightSwordCollider.SetHitSfx(SWORD_HIT_NORMAL_SFX_PATH);
 	}
 
 	private void Start()
@@ -45,6 +67,12 @@ public class FireWarriorUnit : UnitBase
 	{
 		_LeftSwordCollider.OnDamageDealt += OnSwordSwingDamageDealt;
 		_RightSwordCollider.OnDamageDealt += OnSwordSwingDamageDealt;
+	}
+
+	private void OnDisable()
+	{
+		_LeftSwordCollider.OnDamageDealt -= OnSwordSwingDamageDealt;
+		_RightSwordCollider.OnDamageDealt -= OnSwordSwingDamageDealt;
 	}
 
 	private void OnSwordSwingDamageDealt()
@@ -96,6 +124,7 @@ public class FireWarriorUnit : UnitBase
 			_Rigidbody.velocity = new(_Rigidbody.velocity.x, 0);
 			_Rigidbody.AddForce(Vector2.up * _Data.JumpForce, ForceMode2D.Impulse);
 			_Data.JumpAmountLeft--;
+			_AudioManager.PlayOneShot(JUMP_SFX_PATH, transform.position);
 		}
 
 		if (_Data.IsDodging())
@@ -112,7 +141,15 @@ public class FireWarriorUnit : UnitBase
 		{
 			_Data.DodgeDurationLeft = _Data.DodgeDuration;
 			_Data.DodgeCooldownLeft = _Data.DodgeCooldown;
-			// TODO: maybe change Y velocity if dodging in air? 
+			if (IsGrounded())
+			{
+				_AudioManager.PlayOneShot(DODGE_GROUND_SFX_PATH, transform.position);
+			}
+			else
+			{
+				_AudioManager.PlayOneShot(DODGE_AIR_SFX_PATH, transform.position);
+			}
+			_Rigidbody.velocity = new(_Rigidbody.velocity.x, 0);
 		}
 
 		UpdateAnimation();
@@ -177,10 +214,14 @@ public class FireWarriorUnit : UnitBase
 		if (_Data.IsFireMode)
 		{
 			_Animator.runtimeAnimatorController = _AnimatorFire;
+			_LeftSwordCollider.SetHitSfx(SWORD_HIT_FIRE_SFX_PATH);
+			_RightSwordCollider.SetHitSfx(SWORD_HIT_FIRE_SFX_PATH);
 		}
 		else
 		{
 			_Animator.runtimeAnimatorController = _AnimatorNormal;
+			_LeftSwordCollider.SetHitSfx(SWORD_HIT_NORMAL_SFX_PATH);
+			_RightSwordCollider.SetHitSfx(SWORD_HIT_NORMAL_SFX_PATH);
 		}
 		SetAttackDamage(_Data.GetAttack());
 	}
@@ -257,9 +298,13 @@ public class FireWarriorUnit : UnitBase
 			{
 				ChangeAnimationState(ATTACK);
 			}
+			else if (Mathf.Sign(_Rigidbody.velocity.y) == 1f)
+			{
+				ChangeAnimationState(JUMP);
+			}
 			else
 			{
-				ChangeAnimationState(Mathf.Sign(_Rigidbody.velocity.y) == 1f ? JUMP : FALL);
+				ChangeAnimationState(FALL);
 			}
 		}
 	}

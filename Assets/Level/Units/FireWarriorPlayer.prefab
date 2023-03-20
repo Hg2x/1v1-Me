@@ -252,6 +252,20 @@ MonoBehaviour:
   _AnimatorFire: {fileID: 9100000, guid: b5be73b49fbe4ea48a348e16ea3afe41, type: 2}
   _LeftSwordCollider: {fileID: 4547311464476922349}
   _RightSwordCollider: {fileID: 956466287535651831}
+  SWORD_HIT_NORMAL_EVENT:
+    Guid:
+      Data1: -2072346238
+      Data2: 1277502231
+      Data3: -665709895
+      Data4: 557220810
+    Path: event:/Sfx/FireWarrior/SwordHit_Normal
+  SWORD_HIT_FIRE_EVENT:
+    Guid:
+      Data1: 487715569
+      Data2: 1277308801
+      Data3: -1519230074
+      Data4: -485083097
+    Path: event:/Sfx/FireWarrior/SwordHit_Fire
 --- !u!212 &1306049761460859215
 SpriteRenderer:
   m_ObjectHideFlags: 0

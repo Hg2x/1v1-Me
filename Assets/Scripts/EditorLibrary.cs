@@ -23,6 +23,6 @@ namespace ICKT.Editor
 				GUI.enabled = true;
 			}
 		}
-	}
 #endif
+	}
 }

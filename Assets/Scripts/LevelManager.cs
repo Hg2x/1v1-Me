@@ -1,4 +1,5 @@
 using ICKT.Services;
+using ICKT.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,7 @@ public class LevelManager : MonoBehaviour, IRegisterable
 
 	private void Start()
 	{
+		UIManager.Show<UIBattle>();
 		_PlayerUnit = Instantiate(_PlayerUnitPrefab, _PlayerSpawnPoint);
 		_EnemyUnit = Instantiate(_EnemyUnitPrefab, _EnemySpawnPoint);
 		if (_EnemyUnit.gameObject.TryGetComponent(out SimpleGolemAI simpleAI)) // TODO: change this implementation

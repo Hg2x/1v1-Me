@@ -21,6 +21,7 @@ namespace ICKT
 			if (_Instance != null)
 			{
 				Destroy(gameObject);
+				return;
 			}
 
 			_Instance = this;

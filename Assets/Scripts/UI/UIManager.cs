@@ -9,7 +9,6 @@ namespace ICKT.UI
 		private static UIManager _Instance;
 
 		private bool _IsInitialized = false;
-		private UIBase _StartingUI;
 		private readonly Dictionary<System.Type, UIBase> _UICollection = new();
 		private readonly List<UIBase> _CreatedUIList = new();
 		private readonly Stack<UIBase> _OpenUIhistory = new();
@@ -35,15 +34,6 @@ namespace ICKT.UI
 			{
 				Debug.LogError("UI Manager should not Init more than once");
 				return;
-			}
-
-			_StartingUI = data.StartingUI;
-			if (_StartingUI != null) // TODO: change implementation later
-			{
-				var createdUI = Instantiate(_StartingUI);
-				createdUI.Init();
-				_Instance._CurrentUI = createdUI;
-				_Instance._CreatedUIList.Add(createdUI);
 			}
 
 			UIBase[] uiCollection = data.UICollection;

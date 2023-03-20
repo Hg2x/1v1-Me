@@ -63,6 +63,8 @@ namespace ICKT.Audio
 			{
 				Debug.LogError("AudioManager is already initialized.");
 			}
+
+			SetAllVolume();
 		}
 
 		public bool IsPlaying(EventInstance instance)
@@ -82,31 +84,32 @@ namespace ICKT.Audio
 		}
 
 		#region Set Volume
-		public void SetMasterVolume(float volume)
+		public void SetAllVolume()
 		{
 			if (_IsInitialized)
 			{
-				_Data.MasterVolume = Mathf.Clamp01(volume);
-				_MasterVCA.setVolume(_Data.MasterVolume);
+				SetMasterVolume(_Data.MasterVolume);
+				SetMusicVolume(_Data.MusicVolume);
+				SetSfxVolume(_Data.SfxVolume);
 			}
 		}
 
-		public void SetMusicVolume(float volume)
+		private void SetMasterVolume(float volume)
 		{
-			if (_IsInitialized)
-			{
-				_Data.MusicVolume = Mathf.Clamp01(volume);
-				_MusicVCA.setVolume(_Data.MusicVolume);
-			}
+			_Data.MasterVolume = Mathf.Clamp01(volume);
+			_MasterVCA.setVolume(_Data.MasterVolume);
 		}
 
-		public void SetSfxVolume(float volume)
+		private void SetMusicVolume(float volume)
 		{
-			if (_IsInitialized)
-			{
-				_Data.SfxVolume = Mathf.Clamp01(volume);
-				_SfxVCA.setVolume(_Data.SfxVolume);
-			}
+			_Data.MusicVolume = Mathf.Clamp01(volume);
+			_MusicVCA.setVolume(_Data.MusicVolume);
+		}
+
+		private void SetSfxVolume(float volume)
+		{
+			_Data.SfxVolume = Mathf.Clamp01(volume);
+			_SfxVCA.setVolume(_Data.SfxVolume);
 		}
 		#endregion
 

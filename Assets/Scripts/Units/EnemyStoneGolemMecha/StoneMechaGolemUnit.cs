@@ -41,7 +41,6 @@ public class StoneMechaGolemUnit : UnitBase
 		_LeftMeleeCollider.SetParent(gameObject);
 		_RightMeleeCollider.SetParent(gameObject);
 		_LaserPrefab.SetParent(gameObject);
-		_LaserPrefab.SetDamageAmount(_Data.GetAttack());
 		if (gameObject.TryGetComponent(out GolemProjectilePool pool))
 		{
 			_ProjectilePool = pool;
@@ -98,8 +97,8 @@ public class StoneMechaGolemUnit : UnitBase
 		{
 			_LaserPrefab.transform.position = _LeftLaserSpawnPoint.position;
 		}
-		
-		_LaserPrefab.SetDamageAmount(_Data.GetAttack());
+
+		_LaserPrefab.SetDamageAmount(_Data.GetAttack() * _Data.LaserDamageMultiplier);
 		_LaserPrefab.StartCharge();
 		_AudioManager.PlayOneShot(CHARGE_LASER_SFX_PATH, transform.position);
 	}

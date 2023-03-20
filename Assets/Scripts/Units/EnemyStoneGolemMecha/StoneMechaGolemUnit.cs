@@ -142,6 +142,15 @@ public class StoneMechaGolemUnit : UnitBase
 		
 	}
 
+	public override void TakeDamage(float damageAmount)
+	{
+		base.TakeDamage(damageAmount);
+		if (_Data.Health <= 0)
+		{
+			ServiceLocator.Get<LevelManager>().GameOver(true);
+		}
+	}
+
 	private void SetAttackDamage(float attack)
 	{
 		_LeftMeleeCollider.SetDamageAmount(attack);

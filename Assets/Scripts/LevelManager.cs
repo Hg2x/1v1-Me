@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour, IRegisterable
 	private float _ElapsedTime = 0;
 	private float _TotalTime = 0;
 
+	public bool PlayerWon { get; private set; }
+
 	public delegate void SecondPassedHandler(float totalTime);
 	public event SecondPassedHandler OnSecondPassed;
 
@@ -42,7 +44,6 @@ public class LevelManager : MonoBehaviour, IRegisterable
 		{
 			simpleAI.SetWaypoints(_Waypoints);
 		}
-
 	}
 
 	private void OnDestroy()
@@ -62,6 +63,13 @@ public class LevelManager : MonoBehaviour, IRegisterable
 			_ElapsedTime -= 1;
 			OnSecondPassed?.Invoke(_TotalTime);
 		}
+	}
+
+	// TODO: implement a better way to handle game over
+	public void GameOver(bool playerWin)
+	{
+		PlayerWon = playerWin;
+		UIManager.Show<UIGameOver>();
 	}
 
 	private void InitializeWaypoints()

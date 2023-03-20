@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c30e9a964e2874fb25f797d8fb1084, type: 3}
   m_Name: UIManagerDataWithDebug
   m_EditorClassIdentifier: 
-  StartingUI: {fileID: -928788239613314134, guid: dcae186138525104eb42bda048fcbada, type: 3}
   UICollection:
   - {fileID: 4066720859974003637, guid: 4ac679326626c014cb52b960abc6d2b2, type: 3}
   - {fileID: -928788239613314134, guid: dcae186138525104eb42bda048fcbada, type: 3}
   - {fileID: 7977930340643738896, guid: e192521c0b1b1fd44988547e857f2cb0, type: 3}
+  - {fileID: 2837507363479703791, guid: b03931fcb72c1104da42c39ed1613435, type: 3}

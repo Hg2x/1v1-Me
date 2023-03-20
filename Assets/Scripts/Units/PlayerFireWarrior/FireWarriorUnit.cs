@@ -168,6 +168,15 @@ public class FireWarriorUnit : UnitBase
 		EndTransformation(true);
 	}
 
+	public override void TakeDamage(float damageAmount)
+	{
+		base.TakeDamage(damageAmount);
+		if (_Data.Health <= 0)
+		{
+			ServiceLocator.Get<LevelManager>().GameOver(false);
+		}
+	}
+
 	private void SetAttackDamage(float attack)
 	{
 		_LeftSwordCollider.SetDamageAmount(attack);

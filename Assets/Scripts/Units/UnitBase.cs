@@ -17,6 +17,10 @@ public abstract class UnitBase : MonoBehaviour, IDamagable
 	{
 		_DataBaseForm.ModifyHealth(-damageAmount);
 		Debug.Log(gameObject.name +" " + damageAmount + " damage taken");
+		if (_DataBaseForm.Health <= 0)
+		{
+			gameObject.SetActive(false);
+		}
 	}
 
 	public void SetAnimatorPlaybackSpeed(float speed)

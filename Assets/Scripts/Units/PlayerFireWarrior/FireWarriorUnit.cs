@@ -85,6 +85,12 @@ public class FireWarriorUnit : UnitBase
 			}
 		}
 
+		if (_Input.DoJump && _Input.InputMoveVector.y < 0) // if space and down button is pressed together
+		{
+			CheckForElevatedGroundCollider();
+			_Input.DoJump = false;
+		}
+
 		if (_Input.DoJump && _Data.CanJump())
 		{
 			_Rigidbody.velocity = new(_Rigidbody.velocity.x, 0);
@@ -277,5 +283,23 @@ public class FireWarriorUnit : UnitBase
 		}
 
 		PlayAnimation(newAnimation);
+	}
+
+	private void CheckForElevatedGroundCollider()
+	{
+		float checkRadius = 0.1f; // Adjust the radius as needed
+		Vector2 checkPosition = transform.position;
+		LayerMask layerMask = LayerMask.GetMask("Default"); // Replace "Boundary" with the layer name for PassThroughBoundary objects
+
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(checkPosition, checkRadius, layerMask);
+
+		foreach (Collider2D collider in colliders)
+		{
+			ElevatedGroundCollider boundary = collider.GetComponent<ElevatedGroundCollider>(); // TODO: change collider class name later
+			if (boundary != null)
+			{
+				boundary.LetPlayerPassThrough();
+			}
+		}
 	}
 }

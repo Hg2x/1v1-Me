@@ -1,0 +1,326 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6948361621281153812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6948361621281153815}
+  - component: {fileID: 7304698428939147859}
+  - component: {fileID: 5137724220381651992}
+  m_Layer: 0
+  m_Name: ElevatedStoneGround_Group_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6948361621281153815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948361621281153812}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6948361622870148063}
+  - {fileID: 6948361622478377824}
+  - {fileID: 6948361620885444366}
+  - {fileID: 6948361621057240114}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7304698428939147859
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948361621281153812}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 0.42}
+  m_EdgeRadius: 0
+--- !u!114 &5137724220381651992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6948361621281153812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 390ef1bc95cc17d42b55f9c6e0b2c7b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _PassThroughDuration: 1
+--- !u!1001 &3433023044552687885
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6948361621281153815}
+    m_Modifications:
+    - target: {fileID: 5749133347941696209, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_Name
+      value: ElevatedStoneGround_Left_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+--- !u!4 &6948361622870148063 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5749133347941696210, guid: 587ea6def569d0c4dbff28879f742afb, type: 3}
+  m_PrefabInstance: {fileID: 3433023044552687885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4140627629385491610
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6948361621281153815}
+    m_Modifications:
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6421003805537040379, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+      propertyPath: m_Name
+      value: ElevatedStoneGround_2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+--- !u!4 &6948361622478377824 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6421003805537040378, guid: 7033b90cb9b3843438a76807cccd0c29, type: 3}
+  m_PrefabInstance: {fileID: 4140627629385491610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7994104607667951307
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6948361621281153815}
+    m_Modifications:
+    - target: {fileID: 1053079104540705220, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_Name
+      value: ElevatedStoneGround_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+--- !u!4 &6948361620885444366 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1053079104540705221, guid: b1d2a2c956139cb419d55b3216d7a8e7, type: 3}
+  m_PrefabInstance: {fileID: 7994104607667951307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8568624679381506721
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6948361621281153815}
+    m_Modifications:
+    - target: {fileID: 1622514862502241938, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_Name
+      value: ElevatedStoneGround_Right_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+--- !u!4 &6948361621057240114 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1622514862502241939, guid: 5fc4abfd107af454b8f5d0ca954033c8, type: 3}
+  m_PrefabInstance: {fileID: 8568624679381506721}
+  m_PrefabAsset: {fileID: 0}

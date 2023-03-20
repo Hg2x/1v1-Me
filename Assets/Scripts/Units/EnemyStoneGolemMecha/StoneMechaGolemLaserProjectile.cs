@@ -46,6 +46,6 @@ public class StoneMechaGolemLaserProjectile : DamageCollider
 		transform.rotation = FunctionLibrary.GetRotationToPlayer2D((Vector2)transform.position);
 		gameObject.SetActive(true);
 		_Animator.Play(CHARGE_LASER);
-		_Animator.SetFloat("PlaybackSpeed", chargeSpeedMulitplier);
+		_Animator.SetFloat(UnitBase.PLAYBACK_SPEED, chargeSpeedMulitplier);
 	}
 }

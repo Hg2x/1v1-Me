@@ -1,7 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+
+public enum GolemAttackType
+{
+	ArmSwing,
+	ShootArm,
+	ShootLaser
+}
 
 [RequireComponent(typeof(StoneMechaGolemUnit))]
 public class SimpleGolemAI : MonoBehaviour
@@ -11,6 +18,8 @@ public class SimpleGolemAI : MonoBehaviour
 	[SerializeField] private List<Vector2> _Waypoints;
 	private int _CurrentWaypointIndex = 0;
 	[SerializeField] private bool _IsCycleWaypoints = true;
+	private readonly float _WaitTimeBeforeNextAction = 4f;
+	private float _WaitTimeLeft = 0;
 
 	private void Awake()
 	{
@@ -24,7 +33,7 @@ public class SimpleGolemAI : MonoBehaviour
 
 	private void Start()
 	{
-		_GolemUnit.ChangeGolemAnimationState(StoneMechaGolemUnit.IDLE);
+		ToIdle();
 		MoveToNextWaypoint();
 	}
 
@@ -34,8 +43,17 @@ public class SimpleGolemAI : MonoBehaviour
 		{
 			if (Vector2.Distance(transform.position, _Waypoints[_CurrentWaypointIndex]) < 0.1f)
 			{
-				MoveToNextWaypoint();
-				// TODO: add stay in waypoint duration
+				if (_WaitTimeLeft > 0)
+				{
+					_WaitTimeLeft -= Time.deltaTime;
+				}
+				else
+				{
+					_WaitTimeLeft = _WaitTimeBeforeNextAction;
+					MoveToNextWaypoint();
+					ShootArmLaserSwingOne();
+				}
+				// TODO: better way to tweak stay in waypoint duration and behaviour
 			}
 		}
 	}
@@ -57,7 +75,7 @@ public class SimpleGolemAI : MonoBehaviour
 
 	private int ChooseRandomWaypointIndex()
 	{
-		return Random.Range(0, _Waypoints.Count);
+		return UnityEngine.Random.Range(0, _Waypoints.Count);
 	}
 
 	private IEnumerator MoveToPosition(Vector2 targetPosition, float duration)
@@ -74,15 +92,62 @@ public class SimpleGolemAI : MonoBehaviour
 		}
 	}
 
-	// ATTACK SEQUENCES
+	private void ToIdle()
+	{
+		_GolemUnit.ChangeGolemAnimationState(StoneMechaGolemUnit.IDLE);
+	}
+
+	private void SingleAttack(GolemAttackType attackType, Action onAttackDoneCallback = null)
+	{
+		string attackAnimation = attackType switch
+		{
+			GolemAttackType.ArmSwing => StoneMechaGolemUnit.ATTACK,
+			GolemAttackType.ShootArm => StoneMechaGolemUnit.SHOOT_ARM,
+			GolemAttackType.ShootLaser => StoneMechaGolemUnit.SHOOT_LASER,
+			_ => throw new ArgumentOutOfRangeException(nameof(attackType), attackType, "Invalid GolemAttackType")
+		};
+
+		_GolemUnit.FaceTowardsPlayer();
+		onAttackDoneCallback ??= ToIdle;
+		StartCoroutine(_GolemUnit.ChangeGolemAnimationAndWait(attackAnimation, onAttackDoneCallback));
+	}
+
+	private IEnumerator AttackWithDelay(GolemAttackType attackType, float delay, Action onAttackDoneCallback = null)
+	{
+		SingleAttack(attackType);
+		yield return new WaitForSeconds(delay);
+		onAttackDoneCallback?.Invoke();
+	}
+
+
+	// ATTACK SEQUENCES, TODO: remove all hardcoded values
+
+	// swing arm
+	private void SwingArmOne() => SingleAttack(GolemAttackType.ArmSwing);
 
 	// shoot arm
+	private void ShootArmOne() => SingleAttack(GolemAttackType.ShootArm);
+
 	// laser
+	private void ShootLaserOne() => SingleAttack(GolemAttackType.ShootLaser);
+
 	// shoot arm -> arm swing
+	private void ShootArmSwingOne()
+	{
+		SingleAttack(GolemAttackType.ShootArm, SwingArmOne);
+	}
+
 	// go right next to player quickly -> arm swing
 
 	// (shoot arm quickly -> update facing direction)x2
+
 	// shoot arm -> arm swing -> laser
+	private void ShootArmLaserSwingOne()
+	{
+		void shootLaserThenArmSwing() => SingleAttack(GolemAttackType.ShootLaser, SwingArmOne);
+		SingleAttack(GolemAttackType.ShootArm, shootLaserThenArmSwing);
+	}
+
 	// (shoot arm -> update facing direction)x3 -> arm swing
 	// keep following player and spam arm swing
 

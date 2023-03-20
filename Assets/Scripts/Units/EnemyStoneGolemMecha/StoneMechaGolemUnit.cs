@@ -1,4 +1,6 @@
 using ICKT;
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class StoneMechaGolemUnit : UnitBase
@@ -48,29 +50,6 @@ public class StoneMechaGolemUnit : UnitBase
 		_TotalTime += Time.deltaTime;
 
 		FaceTowardsPlayer();
-
-		if (_ElapsedTime >= 1)
-		{
-			_ElapsedTime -= 1;
-
-			// TODO: make combine animations to make reusable attack patterns
-			if (_CurrentAnimation == IDLE)
-			{
-				ChangeAnimationState(SHOOT_ARM);
-			}
-			else if (_CurrentAnimation == SHOOT_ARM)
-			{
-				ChangeAnimationState(ATTACK);
-			}
-			else if (_CurrentAnimation == ATTACK)
-			{
-				ChangeAnimationState(SHOOT_LASER);
-			}
-			else
-			{
-				ChangeAnimationState(IDLE);
-			}
-		}
 	}
 
 	public void OnArmSwing()
@@ -114,6 +93,18 @@ public class StoneMechaGolemUnit : UnitBase
 	public void ChangeGolemAnimationState(string newAnimation)
 	{
 		ChangeAnimationState(newAnimation);
+	}
+
+	public IEnumerator ChangeGolemAnimationAndWait(string animationState, Action onAnimationDoneCallback)
+	{
+		ChangeAnimationState(animationState);
+
+		AnimatorStateInfo stateInfo = _Animator.GetCurrentAnimatorStateInfo(0);
+		float animationDuration = stateInfo.length;
+
+		yield return new WaitForSeconds(animationDuration);
+
+		onAnimationDoneCallback?.Invoke();
 	}
 
 	public void FaceTowardsPlayer()

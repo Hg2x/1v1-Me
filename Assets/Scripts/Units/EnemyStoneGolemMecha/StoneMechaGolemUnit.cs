@@ -120,6 +120,11 @@ public class StoneMechaGolemUnit : UnitBase
 
 	public void FaceTowardsPlayer()
 	{
+		if (_CurrentAnimation != IDLE) // use a better way to check if should flip
+		{
+			return;
+		}
+
 		float zRotationDegreesToPlayer = FunctionLibrary.GetRotationToPlayer2D((Vector2)transform.position).eulerAngles.z;
 		if (zRotationDegreesToPlayer > 90 && zRotationDegreesToPlayer < 270)
 		{
@@ -130,7 +135,8 @@ public class StoneMechaGolemUnit : UnitBase
 			_Data.IsFacingRight = true;
 		}
 
-		// code to check IsFacingRight and flips accordingly below
+		FlipSprite(!_Data.IsFacingRight);
+		
 	}
 
 	private void SetAttackDamage(float attack)

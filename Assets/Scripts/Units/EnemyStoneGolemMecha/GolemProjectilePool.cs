@@ -7,7 +7,8 @@ public class GolemProjectilePool : MonoBehaviour
 {
 	private StoneMechaGolemUnitData _Data;
 	private StoneMechaGolemArmProjectile _ProjectilePrefab;
-	[SerializeField] private Transform _ProjectileSpawnPoint;
+	[SerializeField] private Transform _LeftProjectileSpawnPoint;
+	[SerializeField] private Transform _RightProjectileSpawnPoint;
 
 	private ObjectPool<StoneMechaGolemArmProjectile> _Pool;
 
@@ -32,7 +33,14 @@ public class GolemProjectilePool : MonoBehaviour
 		var projectile = _Pool.Get();
 
 		projectile.SetDamageAmount(_Data.GetAttack());
-		projectile.transform.position = _ProjectileSpawnPoint.position; // TODO: inverse this if golem is facing left
+		if (_Data.IsFacingRight)
+		{
+			projectile.transform.position = _RightProjectileSpawnPoint.position;
+		}
+		else
+		{
+			projectile.transform.position = _LeftProjectileSpawnPoint.position;
+		}
 		Vector3 playerPosition = ServiceLocator.Get<LevelManager>().PlayerTransform.position;
 		Vector2 direction = ((Vector2)playerPosition - (Vector2)projectile.transform.position).normalized;
 		projectile.Launch(_Data.ProjectileSpeed, direction, isGlowing);

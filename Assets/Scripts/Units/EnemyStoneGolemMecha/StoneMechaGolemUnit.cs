@@ -1,3 +1,4 @@
+using ICKT;
 using UnityEngine;
 
 public class StoneMechaGolemUnit : UnitBase
@@ -10,10 +11,10 @@ public class StoneMechaGolemUnit : UnitBase
 	[SerializeField] private Transform _LaserSpawnPoint;
 	private GolemProjectilePool _ProjectilePool;
 
-	private const string IDLE = "Idle";
-	private const string ATTACK = "Attack";
-	private const string SHOOT_ARM = "ShootArm";
-	private const string SHOOT_LASER = "ShootLaser";
+	public const string IDLE = "Idle";
+	public const string ATTACK = "Attack";
+	public const string SHOOT_ARM = "ShootArm";
+	public const string SHOOT_LASER = "ShootLaser";
 
 	private float _ElapsedTime = 0;
 	private float _TotalTime = 0;
@@ -40,15 +41,12 @@ public class StoneMechaGolemUnit : UnitBase
 		}
 	}
 
-	private void Start()
-	{
-		ChangeAnimationState(IDLE);
-	}
-
 	private void Update()
 	{
 		_ElapsedTime += Time.deltaTime;
 		_TotalTime += Time.deltaTime;
+
+		FaceTowardsPlayer();
 
 		if (_ElapsedTime >= 1)
 		{
@@ -76,11 +74,19 @@ public class StoneMechaGolemUnit : UnitBase
 
 	public void OnArmSwing()
 	{
-		_RightMeleeCollider.gameObject.SetActive(true);
+		if (_Data.IsFacingRight)
+		{
+			_RightMeleeCollider.gameObject.SetActive(true);
+		}
+		else
+		{
+			_LeftMeleeCollider.gameObject.SetActive(true);
+		}
 	}
 
 	public void OnArmSwingEnd()
 	{
+		_LeftMeleeCollider.gameObject.SetActive(false);
 		_RightMeleeCollider.gameObject.SetActive(false);
 	}
 
@@ -92,9 +98,39 @@ public class StoneMechaGolemUnit : UnitBase
 	public void StartLaser()
 	{
 		// TODO: change to left/right direction
-		_LaserPrefab.transform.position = _LaserSpawnPoint.transform.position;
+		if (_Data.IsFacingRight)
+		{
+			_LaserPrefab.transform.position = _LaserSpawnPoint.position;
+		}
+		else
+		{
+			Vector3 position = _LaserSpawnPoint.position;
+			position.x = -position.x;
+			_LaserPrefab.transform.position = position;
+		}
+		
 		_LaserPrefab.SetDamageAmount(_Data.GetAttack());
 		_LaserPrefab.StartCharge();
+	}
+
+	public void ChangeGolemAnimationState(string newAnimation)
+	{
+		ChangeAnimationState(newAnimation);
+	}
+
+	public void FaceTowardsPlayer()
+	{
+		float zRotationDegreesToPlayer = FunctionLibrary.GetRotationToPlayer2D((Vector2)transform.position).eulerAngles.z;
+		if (zRotationDegreesToPlayer > 90 && zRotationDegreesToPlayer < 270)
+		{
+			_Data.IsFacingRight = false;
+		}
+		else
+		{
+			_Data.IsFacingRight = true;
+		}
+
+		// code to check IsFacingRight and flips accordingly below
 	}
 
 	private void SetAttackDamage(float attack)

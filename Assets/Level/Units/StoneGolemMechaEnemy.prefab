@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 6552887812067551017}
   - component: {fileID: 8661694574368021140}
   - component: {fileID: -6980713184283164039}
+  - component: {fileID: 4770444205896996643}
   - component: {fileID: 62128263147596812}
   - component: {fileID: 2416012073361715608}
   - component: {fileID: -8098145189197547787}
@@ -329,6 +330,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ProjectileSpawnPoint: {fileID: 5107259574704666131}
+--- !u!114 &4770444205896996643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8375840731471489694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5500c5493d5595c469817fd96ba2372c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Data: {fileID: 11400000, guid: 44a3cdc5504624d418ed544c7c8d3b4a, type: 2}
+  _Waypoints: []
 --- !u!212 &62128263147596812
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -370,7 +385,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1730575210, guid: ee51f69d6fa86bd469915cded39173a9, type: 3}
+  m_Sprite: {fileID: 92479317, guid: ee51f69d6fa86bd469915cded39173a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -396,7 +411,7 @@ Rigidbody2D:
   m_Mass: 100000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -438,8 +453,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.34285715, y: 0}
-    oldSize: {x: 4.375, y: 2.875}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 3, y: 2.875}
     newSize: {x: 3, y: 2.875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

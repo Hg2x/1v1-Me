@@ -1,3 +1,4 @@
+using ICKT;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,9 +18,12 @@ public class SimpleGolemAI : MonoBehaviour
 	[SerializeField] private StoneMechaGolemUnitData _Data;
 	[SerializeField] private List<Vector2> _Waypoints;
 	private int _CurrentWaypointIndex = 0;
-	[SerializeField] private bool _IsCycleWaypoints = true;
+	private bool _IsCycleWaypoints = true;
 	private readonly float _WaitTimeBeforeNextAction = 4f;
 	private float _WaitTimeLeft = 0;
+	private int _WaypointCycleLeft = 0;
+
+	//TODO: remove all hardcoded values
 
 	private void Awake()
 	{
@@ -51,7 +55,7 @@ public class SimpleGolemAI : MonoBehaviour
 				{
 					_WaitTimeLeft = _WaitTimeBeforeNextAction;
 					MoveToNextWaypoint();
-					ShootArmLaserSwingOne();
+					DoRandomAttackSequence();
 				}
 				// TODO: better way to tweak stay in waypoint duration and behaviour
 			}
@@ -60,6 +64,12 @@ public class SimpleGolemAI : MonoBehaviour
 
 	private void MoveToNextWaypoint()
 	{
+		if (_WaypointCycleLeft <= 0)
+		{
+			_IsCycleWaypoints = FunctionLibrary.GetRandomBool();
+			_WaypointCycleLeft = FunctionLibrary.GetRandomNumber(1, _Waypoints.Count - 1);
+		}
+
 		if (_IsCycleWaypoints)
 		{
 			_CurrentWaypointIndex = (_CurrentWaypointIndex + 1) % _Waypoints.Count;
@@ -68,6 +78,7 @@ public class SimpleGolemAI : MonoBehaviour
 		{
 			_CurrentWaypointIndex = ChooseRandomWaypointIndex();
 		}
+		_WaypointCycleLeft--;
 
 		Vector2 targetPosition = _Waypoints[_CurrentWaypointIndex];
 		StartCoroutine(MoveToPosition(targetPosition, 3f));
@@ -119,8 +130,24 @@ public class SimpleGolemAI : MonoBehaviour
 		onAttackDoneCallback?.Invoke();
 	}
 
+	private void DoRandomAttackSequence()
+	{
+		List<Action> attackList = new()
+		{
+			SwingArmOne,
+			ShootArmOne,
+			ShootLaserOne,
+			ShootArmSwingOne,
+			ShootLaserArmOne,
+			ShootArmLaserSwingOne
+		};
 
-	// ATTACK SEQUENCES, TODO: remove all hardcoded values
+		int index = FunctionLibrary.GetRandomNumber(0, attackList.Count - 1);
+		attackList[index]?.Invoke();
+	}
+
+
+	// ATTACK SEQUENCES
 
 	// swing arm
 	private void SwingArmOne() => SingleAttack(GolemAttackType.ArmSwing);
@@ -135,6 +162,12 @@ public class SimpleGolemAI : MonoBehaviour
 	private void ShootArmSwingOne()
 	{
 		SingleAttack(GolemAttackType.ShootArm, SwingArmOne);
+	}
+
+	// shoot laser -> shoot arm
+	private void ShootLaserArmOne()
+	{
+		SingleAttack(GolemAttackType.ShootLaser, ShootArmOne);
 	}
 
 	// go right next to player quickly -> arm swing

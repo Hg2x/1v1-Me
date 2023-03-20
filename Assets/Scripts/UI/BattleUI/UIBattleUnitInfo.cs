@@ -13,7 +13,7 @@ public class UIBattleUnitInfo : MonoBehaviour
 			_Data = data;
 			Subscribe(_Data);
 
-			UpdateHealthBar(_Data.Health, _Data.MaxHealth);
+			UpdateHealthBar(_Data.MaxHealth, _Data.MaxHealth); // TODO: fix this later, update to correct proper health data
 		}
 	}
 

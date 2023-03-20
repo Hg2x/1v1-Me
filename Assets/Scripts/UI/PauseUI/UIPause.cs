@@ -14,4 +14,9 @@ public class UIPause : UIBase
 		GameInstance.ResumeGame();
 		Close();
 	}
+
+	public void OnRetryButtonClicked()
+	{
+		GameInstance.RetryStage();
+	}
 }

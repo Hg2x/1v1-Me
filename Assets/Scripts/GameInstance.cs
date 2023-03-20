@@ -29,7 +29,14 @@ namespace ICKT
 			DontDestroyOnLoad(_Instance);
 		}
 
-		public static void GoToScene(string SceneName, Action callback)
+		public static void RetryStage()
+		{
+			ResumeGame();
+			UIManager.ClearAllUI();
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
+
+		private static void GoToScene(string SceneName, Action callback = null)
 		{
 			ResumeGame();
 			UIManager.ClearAllUI();
@@ -46,7 +53,7 @@ namespace ICKT
 			Time.timeScale = 1;
 		}
 
-		private static IEnumerator LoadSceneAsync(string sceneName, Action callback)
+		private static IEnumerator LoadSceneAsync(string sceneName, Action callback = null)
 		{
 			AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 			while (!asyncLoad.isDone)
@@ -54,7 +61,7 @@ namespace ICKT
 				yield return null;
 			}
 
-			callback();
+			callback?.Invoke();
 		}
 	}
 }

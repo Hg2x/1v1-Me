@@ -12,11 +12,7 @@ public abstract class UnitBase : MonoBehaviour, IDamagable
 
 	public virtual void TakeDamage(float damageAmount)
 	{
-		_DataBaseForm.Health -= damageAmount;
-		if (_DataBaseForm.Health > _DataBaseForm.MaxHealth)
-		{
-			_DataBaseForm.Health = _DataBaseForm.MaxHealth;
-		}
+		_DataBaseForm.ModifyHealth(-damageAmount);
 		Debug.Log(gameObject.name +" " + damageAmount + " damage taken");
 	}
 

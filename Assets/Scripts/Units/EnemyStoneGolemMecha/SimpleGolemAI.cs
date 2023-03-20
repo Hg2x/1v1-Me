@@ -10,33 +10,54 @@ public class SimpleGolemAI : MonoBehaviour
 	[SerializeField] private StoneMechaGolemUnitData _Data;
 	[SerializeField] private List<Vector2> _Waypoints;
 	private int _CurrentWaypointIndex = 0;
+	[SerializeField] private bool _IsCycleWaypoints = true;
 
 	private void Awake()
 	{
 		_GolemUnit = GetComponent<StoneMechaGolemUnit>();
-		// TODO: get waypoints from level manager
+	}
+
+	public void SetWaypoints(List<Vector2> waypoints)
+	{
+		_Waypoints = waypoints;
 	}
 
 	private void Start()
 	{
 		_GolemUnit.ChangeGolemAnimationState(StoneMechaGolemUnit.IDLE);
-		//MoveToNextWaypoint();
+		MoveToNextWaypoint();
 	}
 
 	private void Update()
 	{
-		//if (Vector2.Distance(transform.position, _Waypoints[_CurrentWaypointIndex]) < 0.1f)
-		//{
-		//	MoveToNextWaypoint();
-		//}
-		StartCoroutine(MoveToPosition(new Vector2(5, -1), 2f));
+		if (_Waypoints != null && _Waypoints.Count != 0)
+		{
+			if (Vector2.Distance(transform.position, _Waypoints[_CurrentWaypointIndex]) < 0.1f)
+			{
+				MoveToNextWaypoint();
+				// TODO: add stay in waypoint duration
+			}
+		}
 	}
 
 	private void MoveToNextWaypoint()
 	{
-		// TODO: choose waypoint index with bias
+		if (_IsCycleWaypoints)
+		{
+			_CurrentWaypointIndex = (_CurrentWaypointIndex + 1) % _Waypoints.Count;
+		}
+		else
+		{
+			_CurrentWaypointIndex = ChooseRandomWaypointIndex();
+		}
+
 		Vector2 targetPosition = _Waypoints[_CurrentWaypointIndex];
-		//StartCoroutine(MoveToPosition(targetPosition, 3f));
+		StartCoroutine(MoveToPosition(targetPosition, 3f));
+	}
+
+	private int ChooseRandomWaypointIndex()
+	{
+		return Random.Range(0, _Waypoints.Count);
 	}
 
 	private IEnumerator MoveToPosition(Vector2 targetPosition, float duration)

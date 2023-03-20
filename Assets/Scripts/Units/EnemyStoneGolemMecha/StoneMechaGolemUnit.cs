@@ -1,4 +1,6 @@
 using ICKT;
+using ICKT.Audio;
+using ICKT.Services;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -15,13 +17,15 @@ public class StoneMechaGolemUnit : UnitBase
 	private GolemProjectilePool _ProjectilePool;
 	private Collider2D _OuterCollider;
 
+	private AudioManager _AudioManager;
+	private const string CHARGE_LASER_SFX_PATH = "event:/Sfx/StoneMechaGolem/ChargeLaser";
+	private const string SHOOT_ARM_SFX_PATH = "event:/Sfx/StoneMechaGolem/ShootArm";
+	private const string SWING_ARM_SFX_PATH = "event:/Sfx/StoneMechaGolem/SwingArm";
+
 	public const string IDLE = "Idle";
 	public const string ATTACK = "Attack";
 	public const string SHOOT_ARM = "ShootArm";
 	public const string SHOOT_LASER = "ShootLaser";
-
-	private float _ElapsedTime = 0;
-	private float _TotalTime = 0;
 
 	protected override void Awake()
 	{
@@ -45,6 +49,8 @@ public class StoneMechaGolemUnit : UnitBase
 		}
 
 		_OuterCollider = GetComponent<Collider2D>();
+
+		_AudioManager = ServiceLocator.Get<AudioManager>();
 	}
 
 	protected virtual void OnCollisionEnter2D(Collision2D collision) // TODO: implement a better way to ignore collision with player
@@ -54,9 +60,6 @@ public class StoneMechaGolemUnit : UnitBase
 
 	private void Update()
 	{
-		_ElapsedTime += Time.deltaTime;
-		_TotalTime += Time.deltaTime;
-
 		FaceTowardsPlayer();
 	}
 
@@ -70,6 +73,7 @@ public class StoneMechaGolemUnit : UnitBase
 		{
 			_LeftMeleeCollider.gameObject.SetActive(true);
 		}
+		_AudioManager.PlayOneShot(SWING_ARM_SFX_PATH, transform.position);
 	}
 
 	public void OnArmSwingEnd()
@@ -81,6 +85,7 @@ public class StoneMechaGolemUnit : UnitBase
 	public void OnShootArm()
 	{
 		_ProjectilePool.LaunchNormalProjectile(); // Normal shoot that targets player unit
+		_AudioManager.PlayOneShot(SHOOT_ARM_SFX_PATH, transform.position);
 	}
 
 	public void StartLaser()
@@ -96,6 +101,7 @@ public class StoneMechaGolemUnit : UnitBase
 		
 		_LaserPrefab.SetDamageAmount(_Data.GetAttack());
 		_LaserPrefab.StartCharge();
+		_AudioManager.PlayOneShot(CHARGE_LASER_SFX_PATH, transform.position);
 	}
 
 	public void ChangeGolemAnimationState(string newAnimation)

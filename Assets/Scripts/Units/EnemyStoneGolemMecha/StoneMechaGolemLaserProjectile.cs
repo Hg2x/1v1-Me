@@ -1,4 +1,6 @@
 using ICKT;
+using ICKT.Audio;
+using ICKT.Services;
 using UnityEngine;
 
 public class StoneMechaGolemLaserProjectile : DamageCollider
@@ -6,6 +8,8 @@ public class StoneMechaGolemLaserProjectile : DamageCollider
 	[SerializeField] private BoxCollider2D _Collider;
 	private Animator _Animator;
 	private float _LaserDuration;
+
+	private const string SHOOT_LASER_SFX_PATH = "event:/Sfx/StoneMechaGolem/ShootLaser";
 
 	private const string CHARGE_LASER = "ChargeLaser";
 	private const string SHOOT_LASER = "ShootLaser";
@@ -21,6 +25,7 @@ public class StoneMechaGolemLaserProjectile : DamageCollider
 	{
 		_Animator.Play(SHOOT_LASER);
 		_Collider.gameObject.SetActive(true);
+		ServiceLocator.Get<AudioManager>().PlayOneShot(SHOOT_LASER_SFX_PATH, transform.position);
 	}
 
 	public void OnShootLaserEnd()

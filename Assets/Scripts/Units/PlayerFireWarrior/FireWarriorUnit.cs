@@ -16,13 +16,13 @@ public class FireWarriorUnit : UnitBase
 
 	// TODO: clean up and streamline all the SFX code and assets
 	private AudioManager _AudioManager;
-	[SerializeField] private List<EventReference> _SfxEventReferences;
 	private const string DODGE_AIR_SFX_PATH = "event:/Sfx/FireWarrior/DodgeAir";
 	private const string DODGE_GROUND_SFX_PATH = "event:/Sfx/FireWarrior/DodgeGround";
 	private const string JUMP_SFX_PATH = "event:/Sfx/FireWarrior/Jump";
 	private const string SWORD_HIT_NORMAL_SFX_PATH = "event:/Sfx/FireWarrior/SwordHit_Normal";
 	private const string SWORD_HIT_FIRE_SFX_PATH = "event:/Sfx/FireWarrior/SwordHit_Fire";
 	private const string TAKE_DAMAGE_SFX_PATH = "event:/Sfx/FireWarrior/TakeDamage";
+	private const string TRANSFORMATION_TO_FIRE_SFX_PATH = "event:/Sfx/FireWarrior/TransformationToFire";
 
 	private const string IDLE = "Idle";
 	private const string RUN = "Run";
@@ -50,10 +50,6 @@ public class FireWarriorUnit : UnitBase
 		EnableSwordCollider(false);
 
 		_AudioManager = ServiceLocator.Get<AudioManager>();
-		foreach(var sfx in _SfxEventReferences)
-		{
-			_AudioManager.CreateInstance(sfx);
-		}
 		_LeftSwordCollider.SetHitSfx(SWORD_HIT_NORMAL_SFX_PATH);
 		_RightSwordCollider.SetHitSfx(SWORD_HIT_NORMAL_SFX_PATH);
 	}

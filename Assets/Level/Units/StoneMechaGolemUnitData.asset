@@ -15,7 +15,7 @@ MonoBehaviour:
   MaxHealth: 100
   Health: 100
   Attack: 2
-  IsFacingRight: 1
+  IsFacingRight: 0
   BaseMoveSpeed: 0
   IsAttacking: 0
   GravityScale: 0
@@ -24,3 +24,4 @@ MonoBehaviour:
   ProjectileSpeed: 5
   IsGlowing: 0
   ProjectileDuration: 3
+  LaserDamageMultiplier: 2

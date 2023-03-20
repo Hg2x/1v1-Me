@@ -19,7 +19,7 @@ public class SimpleGolemAI : MonoBehaviour
 	[SerializeField] private List<Vector2> _Waypoints;
 	private int _CurrentWaypointIndex = 0;
 	private bool _IsCycleWaypoints = true;
-	private readonly float _WaitTimeBeforeNextAction = 4f;
+	private float _WaitTimeBeforeNextAction = 4f;
 	private float _WaitTimeLeft = 0;
 	private int _WaypointCycleLeft = 0;
 
@@ -53,6 +53,7 @@ public class SimpleGolemAI : MonoBehaviour
 				}
 				else
 				{
+					_WaitTimeBeforeNextAction = FunctionLibrary.GetRandomNumber(2, 5);
 					_WaitTimeLeft = _WaitTimeBeforeNextAction;
 					MoveToNextWaypoint();
 					DoRandomAttackSequence();

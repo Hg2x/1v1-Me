@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireWarriorUnitData
   m_EditorClassIdentifier: 
   MaxHealth: 25
-  Health: -1
+  Health: 25
   Attack: 1
   IsFacingRight: 1
   BaseMoveSpeed: 4.5

@@ -57,6 +57,16 @@ namespace ICKT
 			Time.timeScale = 1;
 		}
 
+		public static void ExitGame()
+		{
+			Application.Quit();
+		}
+
+		public static bool IsWebGLBuild()
+		{
+			return Application.platform == RuntimePlatform.WebGLPlayer;
+		}
+
 		private static IEnumerator LoadSceneAsync(string sceneName, Action callback = null)
 		{
 			AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);

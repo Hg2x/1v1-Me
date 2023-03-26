@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc9d803e10b12346bc4d03837798ce3, type: 3}
   m_Name: AudioManagerData
   m_EditorClassIdentifier: 
-  MasterVolume: 1
-  MusicVolume: 0
-  SfxVolume: 0
+  MasterVolume: 0.7941176
+  MusicVolume: 1
+  SfxVolume: 1
   <StartingMusic>k__BackingField:
     Guid:
       Data1: -2063609909

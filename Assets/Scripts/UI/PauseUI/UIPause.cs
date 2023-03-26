@@ -11,12 +11,14 @@ public class UIPause : UIBase
 	[SerializeField] private Slider _MasterVolumeSlider;
 	[SerializeField] private Slider _MusicVolumeSlider;
 	[SerializeField] private Slider _SfxVolumeSlider;
+	private bool _IsInitialized = false;
 
-	private void OnEnable()
+	private void Awake()
 	{
 		_MasterVolumeSlider.value = _AudioData.MasterVolume;
 		_MusicVolumeSlider.value = _AudioData.MusicVolume;
 		_SfxVolumeSlider.value = _AudioData.SfxVolume;
+		_IsInitialized = true;
 	}
 
 	public override void Show()
@@ -27,10 +29,13 @@ public class UIPause : UIBase
 
 	public void OnVolumeSliderValueChanged()
 	{
-		_AudioData.MasterVolume = _MasterVolumeSlider.value;
-		_AudioData.MusicVolume = _MusicVolumeSlider.value;
-		_AudioData.SfxVolume = _SfxVolumeSlider.value;
-		ServiceLocator.Get<AudioManager>().SetAllVolume();
+		if (_IsInitialized)
+		{
+			_AudioData.MasterVolume = _MasterVolumeSlider.value;
+			_AudioData.MusicVolume = _MusicVolumeSlider.value;
+			_AudioData.SfxVolume = _SfxVolumeSlider.value;
+			ServiceLocator.Get<AudioManager>().SetAllVolume();
+		}
 	}
 
 	public void OnResumeButtonClicked()

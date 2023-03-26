@@ -96,20 +96,17 @@ namespace ICKT.Audio
 
 		private void SetMasterVolume(float volume)
 		{
-			_Data.MasterVolume = Mathf.Clamp01(volume);
-			_MasterVCA.setVolume(_Data.MasterVolume);
+			_MasterVCA.setVolume(Mathf.Clamp01(volume));
 		}
 
 		private void SetMusicVolume(float volume)
 		{
-			_Data.MusicVolume = Mathf.Clamp01(volume);
-			_MusicVCA.setVolume(_Data.MusicVolume);
+			_MusicVCA.setVolume(Mathf.Clamp01(volume));
 		}
 
 		private void SetSfxVolume(float volume)
 		{
-			_Data.SfxVolume = Mathf.Clamp01(volume);
-			_SfxVCA.setVolume(_Data.SfxVolume);
+			_SfxVCA.setVolume(Mathf.Clamp01(volume));
 		}
 		#endregion
 
